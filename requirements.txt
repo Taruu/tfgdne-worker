@@ -1,0 +1,8 @@
+huggingface-hub
+numpy
+pandas
+pillow >= 9.5.0
+simple-parsing
+jax[cpu]
+flax
+einops
