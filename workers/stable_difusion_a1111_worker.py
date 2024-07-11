@@ -41,6 +41,9 @@ class StableDiffusion:
             base64.b64decode(image) for image in response['images']
         ]
 
+    def get_job_count(self):
+        pass
+
     def interrogate(self, image, model):
         encoded_image = base64.b64encode(image).decode('ASCII')
         return self.post_request(
