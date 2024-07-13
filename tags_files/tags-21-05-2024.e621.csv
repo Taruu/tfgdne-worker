@@ -13,7 +13,6 @@ id,name,category,post_count
 70,fox,5,348188
 74,otter,5,30362
 77,wolf,5,298371
-78,male,0,2307447
 80,klonoa,4,2014
 85,hug,0,39982
 92,breasts,0,1623541
@@ -1000,7 +999,6 @@ id,name,category,post_count
 8314,bamboo,0,1299
 8322,restricted_palette,7,8999
 8332,planet,0,4274
-8337,belly,0,232755
 8347,milk,0,26808
 8372,aura,0,1593
 8379,bioluminescence,0,5883
@@ -1781,7 +1779,6 @@ id,name,category,post_count
 39119,dragon_ball,3,6449
 39152,green_background,0,16565
 39262,felis,5,267040
-39277,white_belly,0,10198
 39306,camelid,5,4430
 39514,tyrannosaurus,5,6228
 39599,arms_above_head,0,9330
@@ -1869,7 +1866,6 @@ id,name,category,post_count
 51637,furniture,0,293175
 51698,league_of_legends,3,28193
 51735,chip_'n_dale_rescue_rangers,3,3296
-51808,big_belly,0,95949
 51834,blue_fire,0,1631
 52038,striped_fur,0,39234
 52106,fur_markings,0,16437
@@ -2105,7 +2101,6 @@ id,name,category,post_count
 83577,huge_muscles,0,21223
 83610,ringed_tail,0,7421
 83979,hotpants,0,11132
-83982,faceless_male,0,86279
 84308,wonderbolts_(mlp),4,4829
 84412,wizard_hat,0,2448
 84433,merfolk,5,5551
@@ -2180,7 +2175,6 @@ id,name,category,post_count
 95299,shih_tzu,5,11142
 95537,royal_guard_(mlp),4,1655
 96065,one_leg_up,0,10256
-96183,hyper_belly,0,13464
 96255,snaggle_tooth,0,4225
 96310,noseless,0,5852
 96570,4_arms,0,11385
@@ -2454,7 +2448,6 @@ id,name,category,post_count
 144859,flesh_tunnel,0,2632
 144958,hooved_fingers,0,4125
 144973,casual_nudity,0,17843
-145338,male/male,0,461983
 145515,ear_ring,0,90820
 145582,ubisoft,3,2069
 145759,red_tongue,0,9178
@@ -2511,7 +2504,6 @@ id,name,category,post_count
 150791,spotted_tail,0,3326
 150794,brown_mane,0,2895
 150842,ceratopsian,5,4109
-151015,muscular_male,0,281977
 151169,ambiguous_species,5,9631
 151396,huge_hips,0,13108
 151408,fur_growth,0,2249
@@ -2519,7 +2511,6 @@ id,name,category,post_count
 151779,bed_sheet,0,14645
 151904,red_feathers,0,7447
 152230,inuhoshi-to-darkpen,1,604
-152245,older_male,0,23851
 152627,reading_book,0,1350
 152933,tribal_clothing,0,1202
 153175,2021,7,184970
@@ -2599,7 +2590,6 @@ id,name,category,post_count
 164425,lying_on_bed,0,7774
 164465,3_eyes,0,4161
 165191,biped,0,428281
-165358,male/female,0,622537
 165702,sharp_nails,0,3235
 165813,dominant_female,0,39206
 166199,pokemon_(species),5,472566
@@ -2667,7 +2657,6 @@ id,name,category,post_count
 176936,holly_(plant),0,2978
 177558,rairai-no26-chu,1,626
 178155,2_heads,0,3275
-178449,huge_belly,0,19045
 178771,bridal_carry,0,873
 178959,selfie,0,12191
 179335,alasou,1,744
@@ -2798,7 +2787,6 @@ id,name,category,post_count
 213168,purple_wings,0,2138
 213510,flower_crown,0,1180
 213760,hand_on_arm,0,2856
-213948,belly_scales,0,5555
 214072,grey_pants,0,2964
 214276,grey_horn,0,3771
 214336,aged_up,0,9647
@@ -2892,7 +2880,6 @@ id,name,category,post_count
 237464,crocodilian,5,29881
 237792,brown_hat,0,979
 237944,flutterbat_(mlp),4,1579
-238045,hand_on_belly,0,16992
 239074,skull_head,0,6565
 239178,prequel_adventure,3,2889
 240182,multi_leg,0,1921
@@ -2915,12 +2902,9 @@ id,name,category,post_count
 261675,on_chair,0,5727
 262905,dark_body,0,31849
 263207,voice_acted,7,6876
-263333,smaller_male,0,97648
-263335,larger_male,0,98027
 263336,smaller_female,0,59274
 263671,multicolored_feathers,0,7976
 263753,maud_pie_(mlp),4,1925
-263981,belly_overhang,0,5547
 264993,spotted_body,0,46961
 265797,forehead_markings,0,2129
 266060,kitchiki,1,921
@@ -3045,19 +3029,16 @@ id,name,category,post_count
 295361,chromatic_aberration,0,2572
 295518,human_to_feral,0,3001
 295527,holding_flower,0,1253
-295951,belly_tuft,0,2870
 296035,brown_headwear,0,1229
 296308,holding_glass,0,2409
 296887,holding_pokeball,0,1116
 297166,five_nights_at_freddy's_2,3,10565
-297487,submissive_male,0,69255
 297529,feralized,0,2005
 297836,2024,7,62847
 298116,orange_bottomwear,0,1379
 298940,striped_footwear,0,3888
 299082,ambiguous_feral,0,864
 299647,colored_nails,0,31047
-299877,clothed_male,0,10149
 299926,mangle_(fnaf),4,3056
 299929,toy_bonnie_(fnaf),4,2745
 299930,toy_chica_(fnaf),4,4581
@@ -3105,7 +3086,6 @@ id,name,category,post_count
 318131,feet,0,544777
 318233,holding_food,0,9173
 318559,springtrap_(fnaf),4,1778
-318755,male/ambiguous,0,30627
 319141,megabat,5,1643
 319142,evergreen_tree,0,1197
 319853,chest_wraps,0,1858
@@ -3114,7 +3094,6 @@ id,name,category,post_count
 320775,glacierclear,1,1620
 321383,starlight_glimmer_(mlp),4,4235
 322247,asian_clothing,0,27737
-322259,younger_male,0,31328
 324152,larger_anthro,0,26249
 324174,larger_feral,0,12161
 324490,aged_down,0,2799
@@ -3140,7 +3119,6 @@ id,name,category,post_count
 333125,emoji,0,1939
 333855,larger_human,0,6654
 334034,smaller_version_at_source,7,4230
-335350,young_male,0,40279
 335663,ear_frill,0,2276
 336835,skyrim,3,3228
 336999,patreon_logo,0,19195
@@ -3204,8 +3182,6 @@ id,name,category,post_count
 351553,feathered_dinosaur,5,2803
 351738,back_spikes,0,1619
 351910,alternate_version_at_source,7,15412
-352251,topless_male,0,11985
-352264,mature_male,0,18195
 352664,mixed_breed,5,3080
 354064,public_domain,3,802
 354073,pokeball,0,10155
@@ -3237,7 +3213,6 @@ id,name,category,post_count
 362123,sunnyclockwork,1,507
 362234,clothed_feral,0,7494
 364218,tem,5,2873
-364976,male_on_anthro,0,35851
 364982,chief_bogo,4,1758
 365018,young_female,0,39834
 365226,benjamin_clawhauser,4,1264
@@ -3309,8 +3284,6 @@ id,name,category,post_count
 394932,dual_holding,0,1424
 396810,arachnid_humanoid,5,2572
 396816,monstrous_humanoid,5,3577
-397748,overweight_female,0,49894
-397786,overweight_male,0,113442
 397789,2017,7,135422
 397856,overweight_ambiguous,0,1762
 398747,living_vehicle,5,3979
@@ -3320,7 +3293,6 @@ id,name,category,post_count
 400272,cutlery,0,5428
 400792,9:16,7,25190
 400847,monotone_fur,0,7515
-401332,male_anthro,0,18136
 401511,2_frame_animation,7,877
 402287,size_transformation,0,6588
 403792,zistopia,3,515
@@ -3331,7 +3303,6 @@ id,name,category,post_count
 405055,retsuko,4,2372
 406728,wide_stance,0,1743
 408249,ambiguous_form,0,3110
-408787,bottomless_male,0,10435
 409067,litten,5,1447
 409073,white_shoes,0,1837
 409324,2:1,7,6419
@@ -3927,7 +3898,6 @@ id,name,category,post_count
 786359,truck_(vehicle),0,2040
 786492,commercial_vehicle,0,1505
 786744,navel_outline,0,2184
-788949,male_(lore),8,12870
 788951,spikes_(anatomy),0,29953
 790024,my_little_pony:_the_movie_(2017),3,2273
 790071,marco_fanjul,1,600

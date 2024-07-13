@@ -102,11 +102,14 @@ if __name__ == "__main__":
     for _ in range(25):
         if api1111_worker.current_model_type is TagSource.danbooru:
             rt = RandomTags("../tags_files/tags-26-05-2023.danbooru.csv")
+            artist_tags = rt.get_random_artists()
+            artist_tags = [tag.name for tag in artist_tags]
         else:
             rt = RandomTags("../tags_files/tags-21-05-2024.e621.csv")
+            rta = RandomTags("../tags_files/tags-21-05-2024.artists.e621.csv")
+            artist_tags = rta.get_random_artists(n=4)
+            artist_tags = [f"by {tag.name}" for tag in artist_tags]
 
-        artist_tags = rt.get_random_artists()
-        artist_tags = [tag.name for tag in artist_tags]
         tags = rt.get_random_general()
         tags = [tag.name for tag in tags]
         promt = f"{','.join(artist_tags)} BREAK {','.join(tags)}"

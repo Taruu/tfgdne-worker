@@ -209,9 +209,6 @@ class ScriptOptions:
     char_threshold: float = field(default=0.75)
 
 
-
-
-
 def main(opts: ScriptOptions):
     repo_id = MODEL_REPO_MAP.get(opts.model)
     image_path = Path(opts.image_file).resolve()
@@ -272,15 +269,6 @@ def main(opts: ScriptOptions):
     print("Done!")
 
 
-if __name__ == "__main__":
-    opts, _ = parse_known_args(ScriptOptions)
-    if opts.model not in MODEL_REPO_MAP:
-        print(f"Available models: {list(MODEL_REPO_MAP.keys())}")
-        raise ValueError(f"Unknown model name '{opts.model}'")
-    main(opts)
-
-
-
 # GiNeus
 class ImageTaggerWorker:
     def __init__(self, model: str):
@@ -310,3 +298,11 @@ class ImageTaggerWorker:
             char_threshold=opts.char_threshold,
         )
         return caption, tag_list, ratings, character, general
+
+
+if __name__ == "__main__":
+    opts, _ = parse_known_args(ScriptOptions)
+    if opts.model not in MODEL_REPO_MAP:
+        print(f"Available models: {list(MODEL_REPO_MAP.keys())}")
+        raise ValueError(f"Unknown model name '{opts.model}'")
+    main(opts)
