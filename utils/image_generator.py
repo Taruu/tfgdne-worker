@@ -2,7 +2,7 @@ import random
 from typing import Tuple
 
 from config import settings
-from workers.random_tags_worker import TagSource
+from workers.random_tags_worker import TagSource, RandomTags
 from workers.stable_difusion_a1111_worker import StableDiffusion
 from loguru import logger
 
@@ -54,17 +54,22 @@ class A1111ApiWorker:
     def generate_image(self, prompt: str, negative_prompt: str, count_to_generate=1) -> list[SDImage]:
         self.change_checkpoint()
 
-        #TODO style promt selector
+        # TODO style promt random select
+        # TODO get random seed from yebi.su?
 
+        # I think is bad logic? When random inside
         static_positive_tags = settings[f"static_positive_tags.{self.current_model_type.value}"]
         static_negative_tags = settings[f"static_negative_tags.{self.current_model_type.value}"]
 
-        pos_prompt = f"""{static_positive_tags}, {settings["static_positive_tags.all"]} BREAK {prompt}"""
+        pos_prompt = f"""{static_positive_tags} BREAK {prompt}"""
 
-        neg_prompt = f"""{negative_prompt} BREAK {static_negative_tags} BREAK {settings["static_negative_tags.all"]}"""
+        neg_prompt = f"""{static_negative_tags},{settings["static_negative_tags.all"]} BREAK {negative_prompt}"""
 
-        # I think is bad logic? When random inside
+        width, height = random.choice(settings["a1111_config.sizes_list"]).split("x")  # TODO format cheks
+
         data_dict = {
+            "width": width,
+            "height": height,
             "prompt": pos_prompt,
             "negative_prompt": neg_prompt,
             "sampler_name": random.choice(settings["a1111_config.samplings_methods"]),
@@ -72,17 +77,19 @@ class A1111ApiWorker:
             "denoising_strength": settings["a1111_config.denoising_strength"],
             "steps": settings["a1111_config.steps"],
             "hr_second_pass_steps": settings["a1111_config.hr_second_pass_steps"],
-            "enable_hr": bool(settings["a1111_config.enable_hr"]),
+            "enable_hr": settings["a1111_config.enable_hr"],
             "hr_scale": settings["a1111_config.hr_scale"],
             "cfg_scale": settings["a1111_config.cfg_scale"],
             "batch_size": count_to_generate,
             "restore_faces": False
         }
 
+        # logger.info(f"start gen image by {width}x{height}}")
+
         info, images = self.stable_diffusion_worker.generate(**data_dict)
 
         result_images = []
-        print(len(images))
+
         for seed, image_info, image_bytes in zip(info["all_seeds"], info["infotexts"], images):
             result_images.append(SDImage(seed, image_info, image_bytes))
             self.current_model_count -= 1
@@ -92,9 +99,21 @@ class A1111ApiWorker:
 
 if __name__ == "__main__":
     api1111_worker = A1111ApiWorker()
-    images = api1111_worker.generate_image("red dress, long dress, standing, looking at viewer", "", 2)
+    for _ in range(25):
+        if api1111_worker.current_model_type is TagSource.danbooru:
+            rt = RandomTags("../tags_files/tags-26-05-2023.danbooru.csv")
+        else:
+            rt = RandomTags("../tags_files/tags-21-05-2024.e621.csv")
 
-    for i, image in enumerate(images):
-        with open(f"image-{image.seed}.png", "wb") as file:
-            print(image.info_text)
-            file.write(image.image_bytes)
+        artist_tags = rt.get_random_artists()
+        artist_tags = [tag.name for tag in artist_tags]
+        tags = rt.get_random_general()
+        tags = [tag.name for tag in tags]
+        promt = f"{','.join(artist_tags)} BREAK {','.join(tags)}"
+
+        images = api1111_worker.generate_image(promt, "", 1)
+
+        for i, image in enumerate(images):
+            with open(f"image-{image.seed}.png", "wb") as file:
+                print(image.info_text)
+                file.write(image.image_bytes)

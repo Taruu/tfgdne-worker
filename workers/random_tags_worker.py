@@ -28,11 +28,19 @@ class TagSource(Enum):
 
 
 class Tag:
-    def __init__(self, tag_id: int, name: str, type: int, usage_count: int):
-        self.tag_id = tag_id
-        self.name = name
-        self.type = type
-        self.usage_count = usage_count
+    def __init__(self, tag_id: int, name: str, tag_type: TagType, usage_count: int):
+        # print(tag_id, name, type, usage_count)
+        self.tag_id = int(tag_id)
+        self.name = str(name)
+        self.tag_type = tag_type
+        self.usage_count = int(float(usage_count))
+
+    def is_general(self):
+        return self.tag_type == TagType.general
+
+    def is_artist(self):
+        # print(self.tag_id, self.name, self.type, TagType.artist.value)
+        return self.tag_type == TagType.artist
 
     def __hash__(self):
         return self.name
@@ -41,7 +49,7 @@ class Tag:
         return self.name
 
     def __repr__(self):
-        return f"Tag({self.tag_id}): {self.name}, {self.type} {self.usage_count}"
+        return f"Tag({self.tag_id}): {self.name}, {self.tag_type} {self.usage_count}"
 
 
 class RandomTags:
@@ -55,8 +63,8 @@ class RandomTags:
         if ".e621." in self.path.name:
             self.csv_type = TagSource.e621
             self.header = "id,name,category,post_count".split(',')
-            self.type_dict_convert = {0: TagType.general, 1: TagType.artist, 2: None, 3: TagType.copyright,
-                                      4: TagType.character, 5: TagType.general, 6: None, 7: TagType.meta}
+            self.type_dict_convert = {0: TagType.general, 1: TagType.artist, 2: TagType.meta, 3: TagType.copyright,
+                                      4: TagType.character, 5: TagType.general, 6: TagType.meta, 7: TagType.meta}
         elif ".danbooru." in self.path.name:
             self.csv_type = TagSource.danbooru
             self.header = "id,name,type,usage_count".split(',')
@@ -78,25 +86,47 @@ class RandomTags:
             list_tags.append(self.get_random_tag())
         return list_tags
 
+    def get_random_general(self):
+        tags = self.get_random_tags(1024)
+        tags = list(filter(lambda tag: tag.is_general() and tag.usage_count > 64, tags))
+        if not len(tags):
+            return self.get_random_general()
+        return tags
+
+    def get_random_artists(self):
+        tags = self.get_random_tags(100)
+        tags = list(filter(lambda tag: tag.is_artist() and tag.usage_count > 256, tags))
+        if not len(tags):
+            return self.get_random_artists()
+        return tags
+
     def get_random_tag(self):
         text_line = self.get_random_line()
         tag_info_dict = {}
-        for colum_name, value in zip(self.header, text_line.split(',')):
+        for colum_name, value in zip(self.header, text_line.strip().split(',')):
             tag_info_dict.update({colum_name: value})
         tag_id = tag_info_dict.pop("id")
         name = tag_info_dict.pop("name")
 
         if self.csv_type == TagSource.e621:
-            e621_type = tag_info_dict.pop("category")
-            tag_type = self.type_dict_convert.get(e621_type)
+            value_type = tag_info_dict.pop("category")
+            if not value_type.isnumeric():
+                value_type = 0
+            tag_type = self.type_dict_convert.get(int(value_type))
             tag_usage_count = tag_info_dict.pop('post_count')
         elif self.csv_type == TagSource.danbooru:
-            tag_type = tag_info_dict.pop("type")
+            value_type = tag_info_dict.pop("type")
+            if not value_type.isnumeric():
+                value_type = 0
+            tag_type = self.type_dict_convert.get(int(value_type))
             tag_usage_count = tag_info_dict.pop('usage_count')
         else:
             tag_type = 0
             tag_usage_count = 0
-
+        if not tag_type:
+            tag_type = 0
+        if not tag_usage_count:
+            tag_usage_count = 0
         tag = Tag(tag_id, name, tag_type, tag_usage_count)
         return tag
 
@@ -105,7 +135,10 @@ class RandomTags:
         random_offset = random.randrange(self.path.stat().st_size)
 
         self._file.seek(random_offset)
-        self._file.readline()
+        try:
+            self._file.readline()
+        except UnicodeDecodeError:
+            return self.get_random_line()
         random_line = self._file.readline()
 
         if len(random_line) == 0:
@@ -116,7 +149,9 @@ class RandomTags:
 if __name__ == "__main__":
     rt1 = RandomTags("../tags_files/tags-21-05-2024.e621.csv")
     rt2 = RandomTags("../tags_files/tags-26-05-2023.danbooru.csv")
-    start_time = time()
-    print(rt1.get_random_tags())
-    print(rt2.get_random_tags())
-    print(time() - start_time)
+    start = time()
+    g1 = rt1.get_random_general()
+    g2 = rt2.get_random_general()
+    print("e621", len(g1), g1)
+    print("dan", len(g2), g2)
+    print(time() - start)

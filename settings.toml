@@ -6,30 +6,31 @@ danbooru_file = "tags_files/tags-26-05-2023.danbooru.csv"
 quantity_random_tags = 100
 
 [static_positive_tags]
-e621 = "high quality, hi res, tag panic, (fox, fennec, fox tail, fox ears, female), (animal humanoid:1.2),"
-danbooru = "high quality, highres, absurdres, (fox ears, fox tail, fox girl, animal ears, 1girl)"
+e621 = "high quality, hi res, (fox, fennec, fox tail, fox ears, female), (animal humanoid:1.3), solo, standing,"
+danbooru = "high quality, highres, absurdres, (fox ears, fox tail, fox girl, animal ears, 1girl), solo"
 all = ""
 
 [static_negative_tags]
-e621 = "nude, sex, penis, pussy, nipples, erection, cum, nsfw, 6 fingers, 7 fingers, 4 fingers, 3 fingers, 2 fingers, 1 finger, (fur)"
-danbooru = "nude, sex, nipples, erection, cum, ejaculation, pussy, penis"
-all = "[[worst|low] quality|(low_res:1.1)], ( [tagme | tag_panic]:1.2), (belly:1.1), (compression_artifacts:1.1), (multiple_scenes:0.3), invalid_tag, disambiguation, mutated hands and fingers, fingernails, bad anatomy, wrong anatomy, deformed, mutation, poorly drawn [hands|face|eyes] ,[ugly:blurry, low [contrast|detailed]:0.33]"
+e621 = "boring_e621_v4, (knot, bulge, gynomorph,  intersex:1.5), (nude, sex, penis, pussy, nipples, erection, cum, nsfw:1.5), 6 fingers, 7 fingers, 4 fingers, 3 fingers, 2 fingers, 1 finger, (fur), (text, comic, webcomic, signature), (3d \\(artwork\\):1.4)"
+danbooru = "EasyNegative, nude, sex, nipples, erection, cum, ejaculation, pussy, penis"
+all = " [[worst|low] quality|(low_res:1.1)], ( [tagme | tag_panic]:1.2), (belly:1.1), (compression_artifacts:1.1), (multiple_scenes:0.3), invalid_tag, disambiguation, mutated hands and fingers, fingernails, bad anatomy, wrong anatomy, deformed, mutation, poorly drawn [hands|face|eyes] ,[ugly:blurry, low [contrast|detailed]:0.33]"
 
 [a1111_config]
 e621_models = ["EasyFluffV11.2"]
-danbooru_models = ["hadrianCulice_culiceV10", "helloflatart_v16gvae"]
+danbooru_models = []
+#danbooru_models = ["hadrianCulice_culiceV10", "helloflatart_v16gvae"]
 images_per_model = 10
 #samplings_methods = ['DPM++ 2M', 'DPM++ SDE', 'DPM++ 2M SDE', 'DPM++ 2M SDE Heun', 'DPM++ 2S a', 'DPM++ 3M SDE', 'Euler a', 'Euler', 'LMS', 'Heun', 'DPM2', 'DPM2 a', 'DPM fast', 'DPM adaptive', 'Restart', 'DDIM', 'PLMS', 'UniPC', 'LCM']
 #schedulers_methods = ['automatic', 'uniform', 'karras', 'exponential', 'polyexponential', 'sgm_uniform']
-samplings_methods = ['DPM++ 2M', 'DPM++ SDE', 'DPM++ 2M SDE', 'DPM++ 2M SDE Heun', 'DPM++ 2S a', 'DPM++ 3M SDE', 'Euler a', 'Euler']
-schedulers_methods = ['automatic', 'uniform', 'karras', 'exponential', 'polyexponential', 'sgm_uniform']
-sizes_list = ["786x786", "1024x786", "786x1024", "1024x1024", "512x1024", "1024x512"]
+samplings_methods = ['DPM++ 2M', 'Euler a', 'Euler']
+schedulers_methods = ['automatic']
+sizes_list = ["786x786","786x1024", "512x1024", "512x786"]
 cfg_scale = 7
 steps = 25
 enable_hr = true
 hr_scale = 2
-hr_second_pass_steps = 25
-denoising_strength = 0.65
+hr_second_pass_steps = 20
+denoising_strength = 0.68
 
 
 
