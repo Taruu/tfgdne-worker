@@ -6,12 +6,12 @@ danbooru_file = "tags_files/tags-26-05-2023.danbooru.csv"
 quantity_random_tags = 100
 
 [static_positive_tags]
-e621 = "high quality, hi res, tag panic, (fox, fennec, fox tail, fox ears, female),"
+e621 = "high quality, hi res, tag panic, (fox, fennec, fox tail, fox ears, female), (animal humanoid:1.2),"
 danbooru = "high quality, highres, absurdres, (fox ears, fox tail, fox girl, animal ears, 1girl)"
 all = ""
 
 [static_negative_tags]
-e621 = "nude, sex, penis, pussy, nipples, erection, cum, nsfw, 6 fingers, 7 fingers, 4 fingers, 3 fingers, 2 fingers, 1 finger,"
+e621 = "nude, sex, penis, pussy, nipples, erection, cum, nsfw, 6 fingers, 7 fingers, 4 fingers, 3 fingers, 2 fingers, 1 finger, (fur)"
 danbooru = "nude, sex, nipples, erection, cum, ejaculation, pussy, penis"
 all = "[[worst|low] quality|(low_res:1.1)], ( [tagme | tag_panic]:1.2), (belly:1.1), (compression_artifacts:1.1), (multiple_scenes:0.3), invalid_tag, disambiguation, mutated hands and fingers, fingernails, bad anatomy, wrong anatomy, deformed, mutation, poorly drawn [hands|face|eyes] ,[ugly:blurry, low [contrast|detailed]:0.33]"
 

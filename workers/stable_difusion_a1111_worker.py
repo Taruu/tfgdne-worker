@@ -42,11 +42,10 @@ class StableDiffusion:
             sd_model_checkpoint=checkpoint_name
         )
 
-    def generate(self, prompt, **kwargs):
+    def generate(self, **kwargs):
         """sdapi/v1/txt2img"""
         response = self._post_request(
             'sdapi/v1/txt2img',
-
             **kwargs
         )
         return ujson.loads(response['info']), [
@@ -74,8 +73,9 @@ class StableDiffusionError(Exception):
 if __name__ == "__main__":
     stable_diffusion_worker = StableDiffusion('http://127.0.0.1:7860/', ("user", "test"))
 
-    info, images = stable_diffusion_worker.generate("fox, girl, fennec, dress,", enable_hr=True, hr_scale=1.7,
-                                                    denoising_strength=0.7, )
+    info, images = stable_diffusion_worker.generate(prompt="fox, girl, fennec, dress,", enable_hr=True, hr_scale=1.7,
+                                                    denoising_strength=0.7, steps=25,hr_second_pass_steps=25 )
+    print(info)
     print(info["infotexts"])
     for i, image in enumerate(images):
         with open(f"image{i}.png", "wb") as file:
