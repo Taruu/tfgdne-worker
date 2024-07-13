@@ -150,7 +150,7 @@ class RandomTags:
 
 if __name__ == "__main__":
     rt1 = RandomTags("../tags_files/tags-21-05-2024.e621.csv")
-    rt2 = RandomTags("../tags_files/tags-26-05-2023.danbooru.csv")
+    rt2 = RandomTags("../tags_files/tags-13-07-2024.danbooru.csv")
     start = time()
     g1 = rt1.get_random_general()
     g2 = rt2.get_random_general()

@@ -99,10 +99,10 @@ class A1111ApiWorker:
 
 if __name__ == "__main__":
     api1111_worker = A1111ApiWorker()
-    for _ in range(25):
+    for _ in range(50):
         if api1111_worker.current_model_type is TagSource.danbooru:
-            rt = RandomTags("../tags_files/tags-26-05-2023.danbooru.csv")
-            artist_tags = rt.get_random_artists()
+            rt = RandomTags("../tags_files/tags-13-07-2024.danbooru.csv")
+            artist_tags = rt.get_random_artists(n=1024)
             artist_tags = [tag.name for tag in artist_tags]
         else:
             rt = RandomTags("../tags_files/tags-21-05-2024.e621.csv")

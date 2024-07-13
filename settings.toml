@@ -1,7 +1,8 @@
 [tags_files]
 e621_file = "tags_files/tags-21-05-2024.e621.csv"
-e621_artist_file = "tags_files/e621_tags-2024-05-21_artist.csv"
-danbooru_file = "tags_files/tags-26-05-2023.danbooru.csv"
+e621_artist_file = "tags_files/tags-21-05-2024.artists.e621.csv"
+danbooru_file = "tags_files/tags-13-07-2024.danbooru.csv"
+danbooru_artist_file = "tags_files/tags-13-07-2024.artists.danbooru.csv"
 
 [tags]
 quantity_random_tags = 100
