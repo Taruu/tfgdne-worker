@@ -9,8 +9,7 @@ class StableDiffusion:
         self.endpoint_url = endpoint_url
         self.credentials = HTTPBasicAuth(*credentials) if credentials else None
 
-    def post_request(self, method, **data):
-        print(data)
+    def _post_request(self, method: str, **data):
         response = requests.post(
             f'{self.endpoint_url}/{method}',
             json=data,
@@ -20,19 +19,31 @@ class StableDiffusion:
         response_data = response.json()
 
         if response.status_code != 200:
-            print(response_data)
+            raise StableDiffusionError(response_data)
+
+        return response_data
+
+    def _get_request(self, method: str):
+        response = requests.get(
+            f'{self.endpoint_url}/{method}',
+            auth=self.credentials,
+            timeout=1000
+        )
+        response_data = response.json()
+
+        if response.status_code != 200:
             raise StableDiffusionError(response_data)
 
         return response_data
 
     def set_checkpoint(self, checkpoint_name):
-        return self.post_request(
+        return self._post_request(
             'sdapi/v1/options',
             sd_model_checkpoint=checkpoint_name
         )
 
     def generate(self, prompt, **kwargs):
-        response = self.post_request(
+        response = self._post_request(
             'sdapi/v1/txt2img',
             prompt=prompt,
             **kwargs
@@ -41,12 +52,13 @@ class StableDiffusion:
             base64.b64decode(image) for image in response['images']
         ]
 
-    def get_job_count(self):
-        pass
+    def progress(self):
+        response = self._get_request('sdapi/v1/progress')
+        return response
 
-    def interrogate(self, image, model):
-        encoded_image = base64.b64encode(image).decode('ASCII')
-        return self.post_request(
+    def interrogate(self, image_bytes: bytes, model: str):
+        encoded_image = base64.b64encode(image_bytes).decode('ASCII')
+        return self._post_request(
             'sdapi/v1/interrogate',
             image=encoded_image,
             model=model

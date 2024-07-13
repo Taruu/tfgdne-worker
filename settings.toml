@@ -1,1 +1,21 @@
-[work-time-range]
+[tags_files]
+e621_file = "tags_files/tags-21-05-2024.e621.csv"
+danbooru_file = "tags_files/tags-26-05-2023.danbooru.csv"
+
+[static_positive_tags]
+e621 = ['fox', 'fennec', 'fox tail', 'fox ears', 'female']
+danbooru = ['fox ears', 'fox tail', 'fox girl', 'animal ears', '1girl']
+
+[static_negative_tags]
+e621 = ['nude', 'sex', 'penis', 'pussy', 'nipples', 'erection', 'cum', 'nsfw']
+danbooru = ['nude', 'sex', 'nipples', 'erection', 'cum', 'ejaculation', 'pussy', 'penis']
+
+[a1111_config]
+samplings_methods = ['DPM++ 2M', 'DPM++ SDE', 'DPM++ 2M SDE', 'DPM++ 2M SDE Heun', 'DPM++ 2S a', 'DPM++ 3M SDE', 'Euler a', 'Euler', 'LMS', 'Heun', 'DPM2', 'DPM2 a', 'DPM fast', 'DPM adaptive', 'Restart', 'DDIM', 'PLMS', 'UniPC', 'LCM']
+schedulers_methods = ['automatic', 'uniform', 'karras', 'exponential', 'polyexponential', 'sgm_uniform']
+sizes_list = ["786x786", "1024x786", "786x1024", "1024x1024", "512x1024", "1024x512"]
+steps = 25
+hr_second_pass_steps = 25
+enable_hr = false
+hr_scale = 2
+cfg_scale = 7

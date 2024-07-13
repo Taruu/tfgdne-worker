@@ -114,9 +114,10 @@ class RandomTags:
 
 
 if __name__ == "__main__":
-    start_time = time()
+
     rt1 = RandomTags("../tags_files/tags-21-05-2024.e621.csv")
     rt2 = RandomTags("../tags_files/tags-26-05-2023.danbooru.csv")
+    start_time = time()
     print(rt1.get_random_tags())
     print(rt2.get_random_tags())
     print(time() - start_time)

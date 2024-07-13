@@ -5,7 +5,7 @@ import io
 
 
 class Szurubooru:
-    def __init__(self, endpoint_url='https://thisfoxgirldoesnotexist.com', credentials=None):
+    def __init__(self, endpoint_url: str, credentials=None):
         self.endpoint_url = endpoint_url
         self.auth_data = base64.b64encode(
             f'{credentials[0]}:{credentials[1]}'.encode('UTF-8')
