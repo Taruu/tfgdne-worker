@@ -43,9 +43,10 @@ class StableDiffusion:
         )
 
     def generate(self, prompt, **kwargs):
+        """sdapi/v1/txt2img"""
         response = self._post_request(
             'sdapi/v1/txt2img',
-            prompt=prompt,
+
             **kwargs
         )
         return ujson.loads(response['info']), [

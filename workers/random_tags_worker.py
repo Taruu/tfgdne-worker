@@ -23,8 +23,8 @@ class TagType(Enum):
 
 
 class TagSource(Enum):
-    danbooru = 0
-    e621 = 1
+    danbooru = "danbooru"
+    e621 = "e621"
 
 
 class Tag:
@@ -35,7 +35,7 @@ class Tag:
         self.usage_count = usage_count
 
     def __hash__(self):
-        return str(self.tag_id) + self.name
+        return self.name
 
     def __str__(self):
         return self.name
@@ -72,9 +72,9 @@ class RandomTags:
     def __del__(self):
         self._file.close()
 
-    def get_random_tags(self):
+    def get_random_tags(self, n=120):
         list_tags = []
-        for _ in range(120):
+        for _ in range(n):
             list_tags.append(self.get_random_tag())
         return list_tags
 
@@ -114,7 +114,6 @@ class RandomTags:
 
 
 if __name__ == "__main__":
-
     rt1 = RandomTags("../tags_files/tags-21-05-2024.e621.csv")
     rt2 = RandomTags("../tags_files/tags-26-05-2023.danbooru.csv")
     start_time = time()
