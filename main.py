@@ -35,11 +35,12 @@ while True:
 
     tags = [tag.name for tag in tags]
 
-    prompt = f"{', '.join(artist_tags)} BREAK {', '.join(tags)}"
+    prompt = f"{', '.join(tags)}"
+    artist_prompt = f"{', '.join(tags)}"
     # TODO negative promt generator
 
     try:
-        images = image_gen.generate_image(prompt, "", 1)
+        images = image_gen.generate_image(prompt, "", artist_prompt, 1)
         for image in images:
             imageboard_poster.post_image(image)
         time.sleep(1)

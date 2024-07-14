@@ -68,7 +68,8 @@ class A1111ApiWorker:
         result = self.stable_diffusion_worker.progress()
         return result
 
-    def generate_image(self, prompt: str, negative_prompt: str, count_to_generate=1) -> list[SDImage]:
+    def generate_image(self, prompt: str, negative_prompt: str, artist_prompt: str, count_to_generate=1) -> list[
+        SDImage]:
         self.change_checkpoint()
 
         # TODO style promt random select
@@ -78,9 +79,9 @@ class A1111ApiWorker:
         static_positive_tags = settings[f"static_positive_tags.{self.current_model_type.value}"]
         static_negative_tags = settings[f"static_negative_tags.{self.current_model_type.value}"]
 
-        pos_prompt = f"""{static_positive_tags} BREAK {prompt}"""
+        pos_prompt = f"{artist_prompt}BREAK {static_positive_tags}, {prompt}"
 
-        neg_prompt = f"""{static_negative_tags} BREAK {settings["static_negative_tags.all"]}{negative_prompt}"""
+        neg_prompt = f"{static_negative_tags}, {settings['static_negative_tags.all']}, {negative_prompt}"
 
         width, height = random.choice(settings["a1111_config.sizes_list"]).split("x")  # TODO format cheks
 
