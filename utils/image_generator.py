@@ -79,7 +79,7 @@ class A1111ApiWorker:
         static_positive_tags = settings[f"static_positive_tags.{self.current_model_type.value}"]
         static_negative_tags = settings[f"static_negative_tags.{self.current_model_type.value}"]
 
-        pos_prompt = f"{artist_prompt}BREAK {static_positive_tags}, {prompt}"
+        pos_prompt = f"{artist_prompt} BREAK {static_positive_tags}, {prompt}"
 
         neg_prompt = f"{static_negative_tags}, {settings['static_negative_tags.all']}, {negative_prompt}"
 
