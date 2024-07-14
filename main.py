@@ -36,7 +36,7 @@ while True:
     tags = [tag.name for tag in tags]
 
     prompt = f"{', '.join(tags)}"
-    artist_prompt = f"{', '.join(tags)}"
+    artist_prompt = f"{', '.join(artist_tags)}"
     # TODO negative promt generator
 
     try:
