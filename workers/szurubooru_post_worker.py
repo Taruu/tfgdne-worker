@@ -49,11 +49,11 @@ class SzurubooruApi:
         )
 
     def delete_post(self, post_id, version=1):
-        return self.post_request(
-            f'api/post/{post_id}',
-            json={'version': version},
-            method='delete'
-        )
+        return requests.delete(f"{self.endpoint_url}/api/post/{post_id}",
+                               headers={
+                                   'Accept': 'application/json',
+                                   'Authorization': f'Token {self.auth_data}'},
+                               json={'version': version})
 
     def list_posts(self, offset, limit, query):
         response = requests.get(
@@ -63,7 +63,6 @@ class SzurubooruApi:
                 'Accept': 'application/json'
             }
         )
-        print(response.content)
         data = response.json()
 
         if response.status_code != 200:

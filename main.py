@@ -1,12 +1,38 @@
 from config import settings
-from workers.stable_difusion_a1111_worker import StableDiffusion
+from utils.image_generator import A1111ApiWorker
+from utils.post_image import SzurubooruPoster
+from utils.prompt_generator import PromptGen
+from workers.random_tags_worker import TagSource, RandomTags
 
+prompt_gen_danbooru = PromptGen(TagSource.danbooru)
+prompt_gen_e621 = PromptGen(TagSource.e621)
+image_gen = A1111ApiWorker()
+imageboard_poster = SzurubooruPoster()
 
-info, images = stable_diffusion_worker.generate("fox, girl, fennec, dress,",
-                                                restore_faces=False, tiling=False,
-                                                enable_hr=True, hr_scale=1.7,
-                                                denoising_strength=0.7, )
-print(info["infotexts"])
-for i, image in enumerate(images):
-    with open(f"image{i}.png", "wb") as file:
-        file.write(image)
+tags_gens = {
+    TagSource.danbooru: {
+        'general': RandomTags(settings["tags_files.danbooru_file"]),
+        'artists': RandomTags(settings["tags_files.danbooru_artist_file"])
+    },
+    TagSource.e621: {
+        'general': RandomTags(settings["tags_files.e621_file"]),
+        'artists': RandomTags(settings["tags_files.e621_artist_file"])
+    }
+}
+
+while True:
+    current_type = image_gen.current_model_type
+    tags = tags_gens[current_type]['general'].get_random_tags(settings["tags.quantity_random_tags"])
+    artist_tags = tags_gens[current_type]['artists'].get_random_tags(
+        settings["tags.quantity_random_artists"])
+    if current_type is TagSource.danbooru:
+        pass
+    elif current_type is TagSource.e621:
+        artist_tags = [f"by {tag.name}" for tag in artist_tags]
+    tags = [tag.name for tag in artist_tags]
+
+    prompt = f"{','.join(artist_tags)} BREAK {','.join(tags)}"
+    # TODO negative promt generator
+    images = image_gen.generate_image(prompt, "", 1)
+    for image in images:
+        imageboard_poster.post_image(image)

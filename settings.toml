@@ -1,8 +1,8 @@
 [tags_files]
-e621_file = "tags_files/tags-21-05-2024.e621.csv"
-e621_artist_file = "tags_files/tags-21-05-2024.artists.e621.csv"
 danbooru_file = "tags_files/tags-13-07-2024.danbooru.csv"
 danbooru_artist_file = "tags_files/tags-13-07-2024.artists.danbooru.csv"
+e621_file = "tags_files/tags-21-05-2024.e621.csv"
+e621_artist_file = "tags_files/tags-21-05-2024.artists.e621.csv"
 
 [tags]
 quantity_random_tags = 32
@@ -34,9 +34,10 @@ hr_scale = 2
 hr_second_pass_steps = 20
 denoising_strength = 0.68
 file_ext = "jpg"
+time_to_sleep_if_has_usage = 1800
 
 [imagebouard_config]
-max_images = 90000
+max_images = 90000 #if you set less then set before all older images has beed removed
 
 
 

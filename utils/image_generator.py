@@ -1,5 +1,6 @@
 import io
 import random
+import time
 from typing import Tuple
 
 from config import settings
@@ -65,7 +66,7 @@ class A1111ApiWorker:
 
     def get_progress(self) -> Tuple[int, int]:
         result = self.stable_diffusion_worker.progress()
-        return result["progress"], result["eta_relative"]
+        return result
 
     def generate_image(self, prompt: str, negative_prompt: str, count_to_generate=1) -> list[SDImage]:
         self.change_checkpoint()
@@ -101,6 +102,12 @@ class A1111ApiWorker:
         }
 
         # logger.info(f"start gen image by {width}x{height}}")
+        current_status = self.stable_diffusion_worker.progress()
+        print(current_status)
+        if (current_status['state']['job_count'] > 0) or (current_status['eta_relative'] > 0):
+            logger.info(f'SD used now. Go to sleep')
+            time.sleep(settings["a1111_config.time_to_sleep_if_has_usage"])
+            # TODO loop check
 
         info, images = self.stable_diffusion_worker.generate(**data_dict)
 
