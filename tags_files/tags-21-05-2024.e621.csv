@@ -144,7 +144,6 @@ id,name,category,post_count
 598,japanese,0,5239
 617,flashback,0,1179
 620,towel,0,25831
-631,bdsm,0,131280
 632,pants,0,158620
 636,cooking,0,3185
 651,bath,0,5686
@@ -2081,17 +2080,7 @@ id,name,category,post_count
 82400,cloven_hooves,0,12714
 82418,two_tone_hair,0,67665
 82527,raised_hand,0,5263
-82871,rarity_(mlp),4,24169
-82873,twilight_sparkle_(mlp),4,36116
-82884,fluttershy_(mlp),4,28886
-82885,rainbow_dash_(mlp),4,27952
-82886,pinkie_pie_(mlp),4,23626
-82887,applejack_(mlp),4,20645
-82889,gilda_(mlp),4,2634
-82890,big_macintosh_(mlp),4,6799
 82902,bookshelf,0,4544
-83062,spike_(mlp),4,11493
-83228,princess_luna_(mlp),4,19802
 83233,crash_bandicoot_(series),3,11436
 83307,inner_monologue,0,3258
 83359,fake_ears,0,7116
@@ -2099,15 +2088,11 @@ id,name,category,post_count
 83577,huge_muscles,0,21223
 83610,ringed_tail,0,7421
 83979,hotpants,0,11132
-84308,wonderbolts_(mlp),4,4829
 84412,wizard_hat,0,2448
 84433,merfolk,5,5551
 84620,talking_to_viewer,0,26044
 84751,detailed_background,0,191898
 84776,friendship_is_magic,3,247419
-84869,princess_celestia_(mlp),4,20544
-84960,zecora_(mlp),4,2347
-85065,angel_(mlp),4,1034
 85110,mouth_closed,0,21422
 85179,arm_tattoo,0,6867
 85181,chest_tattoo,0,2810
@@ -2122,7 +2107,6 @@ id,name,category,post_count
 87282,square_crossover,0,6935
 87299,mienshao,5,3266
 87310,hand_on_breast,0,70537
-87342,derpy_hooves_(mlp),4,5965
 87408,name_tag,0,1966
 87571,black_wings,0,4071
 87629,activision,3,20424
@@ -2130,18 +2114,11 @@ id,name,category,post_count
 87712,yellow_skin,0,10509
 87748,zp92,1,3144
 87951,audino,5,2152
-88190,trixie_(mlp),4,7211
-88234,orange_markings,0,2579
-88305,sweetie_belle_(mlp),4,7692
-88308,nightmare_moon_(mlp),4,3728
 88521,head_crest,0,8007
-88555,vinyl_scratch_(mlp),4,4643
 88600,serperior,5,3187
 88628,green_scales,0,27108
-88725,bonbon_(mlp),4,1704
 88816,motion_lines,0,54155
 88869,cutie_mark,0,101847
-88887,scootaloo_(mlp),4,6574
 89164,ayaka,1,1589
 89329,growling,0,2524
 89589,spiked_shell,0,3062
@@ -2168,10 +2145,8 @@ id,name,category,post_count
 93729,kaiju,5,3713
 94146,frame_by_frame,7,20344
 94650,coffee_cup,0,1650
-95099,cutie_mark_crusaders_(mlp),4,2272
 95223,blue_tail,0,18617
 95299,shih_tzu,5,11142
-95537,royal_guard_(mlp),4,1655
 96065,one_leg_up,0,10256
 96255,snaggle_tooth,0,4225
 96310,noseless,0,5852
@@ -2179,14 +2154,11 @@ id,name,category,post_count
 97493,sphynx_(cat),5,2734
 97773,notched_ear,0,16037
 97976,floral,0,1799
-98010,spitfire_(mlp),4,2733
 98033,fur_collar,0,927
 98146,prosthetic_limb,0,5898
-98191,soarin_(mlp),4,2068
 98235,arm_grab,0,8545
 98561,melanistic,0,4441
 98754,orange_sclera,0,3659
-98917,octavia_(mlp),4,3968
 99016,sun_hat,0,2127
 99277,white_mane,0,2594
 100055,bowed_string_instrument,0,954
@@ -2267,7 +2239,6 @@ id,name,category,post_count
 113805,green_sclera,0,6712
 113960,toe_claws,0,146730
 114078,city_background,0,2525
-114226,pinkamena_(mlp),4,2726
 114388,human_on_anthro,0,84992
 114453,pink_underwear,0,9283
 114472,spread_toes,0,5095
@@ -2292,7 +2263,6 @@ id,name,category,post_count
 117581,humor,0,42054
 117650,unconvincing_armor,0,5440
 117752,purple_eyeshadow,0,5382
-117877,discord_(mlp),4,4109
 118086,perspective,0,3428
 118116,pink_body,0,120443
 118165,white_body,0,622977
@@ -2312,7 +2282,6 @@ id,name,category,post_count
 119205,tumblr,3,3508
 119209,tentacle_hair,0,8894
 119689,raised_hoof,0,980
-119848,mane_six_(mlp),4,1392
 119877,tan_skin,0,23095
 120197,hylian,5,8030
 120414,rudragon,1,1109
@@ -2351,7 +2320,6 @@ id,name,category,post_count
 124466,flaming_tail,0,6996
 124659,sonic_the_hedgehog_(series),3,104134
 124830,pandaren,5,4549
-125334,apple_bloom_(mlp),4,6769
 125354,brooch,0,778
 125358,headwear,0,200964
 125524,open_clothing,0,38196
@@ -2442,7 +2410,6 @@ id,name,category,post_count
 144118,purple_horn,0,2570
 144283,haychel,1,1047
 144726,phone,0,42628
-144818,shining_armor_(mlp),4,6958
 144859,flesh_tunnel,0,2632
 144958,hooved_fingers,0,4125
 144973,casual_nudity,0,17843
@@ -2453,13 +2420,11 @@ id,name,category,post_count
 146023,scp_foundation,3,6034
 146044,thick_lips,0,11500
 146125,pink_tail,0,11385
-146162,queen_chrysalis_(mlp),4,8170
 146172,changeling,5,13785
 146435,big_muscles,0,58661
 146533,heart_eyes,0,60121
 146557,leaning_forward,0,14328
 146695,unicorn_horn,0,7351
-146940,princess_cadance_(mlp),4,7063
 146981,dobermann,5,12698
 147070,looking_back_at_viewer,0,39587
 147603,spotted_fur,0,37891
@@ -2495,7 +2460,6 @@ id,name,category,post_count
 149842,melee_weapon,0,64922
 150007,translucent_clothing,0,22793
 150190,ear_stud,0,1750
-150207,lyra_heartstrings_(mlp),4,3484
 150415,fate_(series),3,2952
 150519,brown_scales,0,6331
 150756,forest_background,0,5885
@@ -2628,7 +2592,6 @@ id,name,category,post_count
 170610,hand_on_chin,0,1632
 170624,heart_symbol,0,324593
 171232,3_fingers,0,34229
-171346,king_sombra_(mlp),4,2597
 171648,green_hat,0,1983
 171835,christmas,3,33083
 171960,copyright_symbol,0,3538
@@ -2689,7 +2652,6 @@ id,name,category,post_count
 184855,pink_pawpads,0,32183
 185701,yellow_beak,0,7627
 186504,white_horn,0,9802
-187102,doctor_whooves_(mlp),4,782
 187131,tan_scales,0,7297
 187135,tail_mouth,0,3361
 187241,two_tone_body,0,166678
@@ -2877,7 +2839,6 @@ id,name,category,post_count
 237463,playing_music,0,2603
 237464,crocodilian,5,29881
 237792,brown_hat,0,979
-237944,flutterbat_(mlp),4,1579
 239074,skull_head,0,6565
 239178,prequel_adventure,3,2889
 240182,multi_leg,0,1921
@@ -2902,7 +2863,6 @@ id,name,category,post_count
 263207,voice_acted,7,6876
 263336,smaller_female,0,59274
 263671,multicolored_feathers,0,7976
-263753,maud_pie_(mlp),4,1925
 264993,spotted_body,0,46961
 265797,forehead_markings,0,2129
 266060,kitchiki,1,921
@@ -3077,7 +3037,6 @@ id,name,category,post_count
 320239,kathrin_vaughan,4,1031
 320391,holding_controller,0,2559
 320775,glacierclear,1,1620
-321383,starlight_glimmer_(mlp),4,4235
 322247,asian_clothing,0,27737
 324152,larger_anthro,0,26249
 324174,larger_feral,0,12161
@@ -3430,7 +3389,6 @@ id,name,category,post_count
 480381,mew_(pokemon),5,4329
 480422,female_anthro,0,29328
 481566,suina,5,24639
-482916,tempest_shadow_(mlp),4,1540
 484127,fairy_tales,3,1835
 484328,kemono_friends,3,2567
 484830,obese_male,0,11452
@@ -3539,7 +3497,6 @@ id,name,category,post_count
 559952,tan_ears,0,3873
 561348,rubber_clothing,0,10637
 563204,collar_only,0,18393
-565385,mlp_g5,3,4053
 565712,pokemon_victory_fire,3,738
 568193,slightly_chubby_male,0,12432
 568621,4:5,7,50011
@@ -3959,8 +3916,6 @@ id,name,category,post_count
 897504,moxxie_(helluva_boss),4,3320
 897539,true_musteline,5,17532
 897542,gulonine,5,4964
-899199,izzy_moonbow_(mlp),4,1227
-899459,sunny_starscout_(mlp),4,1031
 899511,pokemon_legends_arceus,3,4217
 902173,odd_taxi,3,1490
 902867,shirtless,0,4852
@@ -3970,7 +3925,6 @@ id,name,category,post_count
 908171,kiss_on_lips,0,7676
 917158,rivet_(ratchet_and_clank),4,3606
 920636,pace-maker,1,1006
-921510,pipp_petals_(mlp),4,1023
 924308,scottgames,3,35811
 924487,dominant,0,138806
 925423,exposure_variation,0,8044
