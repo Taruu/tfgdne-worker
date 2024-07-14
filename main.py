@@ -37,9 +37,11 @@ while True:
 
     prompt = f"{', '.join(artist_tags)} BREAK {', '.join(tags)}"
     # TODO negative promt generator
+
     try:
         images = image_gen.generate_image(prompt, "", 1)
         for image in images:
             imageboard_poster.post_image(image)
+        time.sleep(1)
     except Exception:
         time.sleep(1)
