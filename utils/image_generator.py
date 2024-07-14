@@ -1,3 +1,4 @@
+import io
 import random
 from typing import Tuple
 
@@ -6,12 +7,23 @@ from workers.random_tags_worker import TagSource, RandomTags
 from workers.stable_difusion_a1111_worker import StableDiffusion
 from loguru import logger
 
+from workers.wdv3_jax_worker import ImageTaggerWorker
+
 
 class SDImage:
-    def __init__(self, seed: int, info_text: str, image_bytes: bytes):
+    def __init__(self, seed: int, info_text: str, image_bytes: bytes, model_name: str, ratings: dict,
+                 general_tags: dict):
         self.seed = seed
         self.info_text = info_text
         self.image_bytes = image_bytes
+        self.model_name = model_name
+        # {'general': 0, 'sensitive': 0, 'questionable': 0, 'explicit': 0}
+        self.ratings = ratings
+        self.general_tags = general_tags
+
+    def is_safe(self):
+        value = self.ratings.get("questionable") + self.ratings.get("explicit")
+        return not (value > 0.55)
 
 
 class A1111ApiWorker:
@@ -19,6 +31,7 @@ class A1111ApiWorker:
         self.stable_diffusion_worker = StableDiffusion(settings["a1111_point.url"],
                                                        (settings["a1111_point.login"],
                                                         settings["a1111_point.password"]))
+        self.current_model_name: str = ""
         self.current_model_type: TagSource = TagSource.danbooru
         self.current_model_count = 0
         self.checkpoint_list = []
@@ -31,6 +44,8 @@ class A1111ApiWorker:
 
         self.change_checkpoint()
 
+        self.image_tagger = ImageTaggerWorker()
+
         logger.info(f'connect to server {settings["a1111_point.url"]}')
 
     def change_checkpoint(self):
@@ -39,6 +54,7 @@ class A1111ApiWorker:
         model_name, model_type = random.choice(self.checkpoint_list)
 
         self.stable_diffusion_worker.set_checkpoint(model_name)
+        self.current_model_name = model_name
         self.current_model_type = model_type
         self.current_model_count = settings["a1111_config.images_per_model"]
         logger.info(f'change model to {model_name}, type {model_type}')
@@ -91,7 +107,8 @@ class A1111ApiWorker:
         result_images = []
 
         for seed, image_info, image_bytes in zip(info["all_seeds"], info["infotexts"], images):
-            result_images.append(SDImage(seed, image_info, image_bytes))
+            _, _, ratings, _, general_tags = self.image_tagger.get_image_marks(io.BytesIO(image_bytes))
+            result_images.append(SDImage(seed, image_info, image_bytes, self.current_model_name, ratings, general_tags))
             self.current_model_count -= 1
 
         return result_images
@@ -102,21 +119,23 @@ if __name__ == "__main__":
     for _ in range(50):
         if api1111_worker.current_model_type is TagSource.danbooru:
             rt = RandomTags("../tags_files/tags-13-07-2024.danbooru.csv")
-            artist_tags = rt.get_random_artists(n=1024)
+            artist_tags = rt.get_random_tags(n=4)
             artist_tags = [tag.name for tag in artist_tags]
         else:
             rt = RandomTags("../tags_files/tags-21-05-2024.e621.csv")
             rta = RandomTags("../tags_files/tags-21-05-2024.artists.e621.csv")
-            artist_tags = rta.get_random_artists(n=4)
+            artist_tags = rta.get_random_tags(n=4)
             artist_tags = [f"by {tag.name}" for tag in artist_tags]
 
-        tags = rt.get_random_general()
+        tags = rt.get_random_tags(64)
         tags = [tag.name for tag in tags]
         promt = f"{','.join(artist_tags)} BREAK {','.join(tags)}"
 
         images = api1111_worker.generate_image(promt, "", 1)
 
         for i, image in enumerate(images):
-            with open(f"image-{image.seed}.png", "wb") as file:
+            if not image.is_safe():
+                continue
+            with open(f"../test_images_folder/image-{image.seed}.png", "wb") as file:
                 print(image.info_text)
                 file.write(image.image_bytes)

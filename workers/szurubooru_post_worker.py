@@ -2,24 +2,26 @@ import base64
 import requests
 import ujson
 import io
+from config import settings
 
 
-class Szurubooru:
-    def __init__(self, endpoint_url: str, credentials=None):
+class SzurubooruApi:
+    def __init__(self, endpoint_url: str, login: str, password: str):
         self.endpoint_url = endpoint_url
         self.auth_data = base64.b64encode(
-            f'{credentials[0]}:{credentials[1]}'.encode('UTF-8')
-        ).decode('ASCII') if credentials else None
+            f'{login}:{password}'.encode('UTF-8')
+        ).decode('ASCII') if login else None
 
     def post_request(self, method, **data):
         response = requests.post(
             f'{self.endpoint_url}/{method}',
             headers={
+                'Accept': 'application/json',
                 'Authorization': f'Token {self.auth_data}',
-                'Accept': 'application/json'
             },
             **data
         )
+
         response_data = response.json()
 
         if response.status_code != 200:
@@ -60,6 +62,7 @@ class Szurubooru:
                 'Accept': 'application/json'
             }
         )
+        print(response.content)
         data = response.json()
 
         if response.status_code != 200:
@@ -77,3 +80,9 @@ class Szurubooru:
 class SzurubooruError(Exception):
     def __init__(self, message):
         super().__init__(message)
+
+
+if __name__ == "__main__":
+    szapi = SzurubooruApi(settings["szurubooru.url"], settings["szurubooru.login"], settings["szurubooru.password"])
+    res = szapi.list_posts(0, 10, "")
+    print(res)

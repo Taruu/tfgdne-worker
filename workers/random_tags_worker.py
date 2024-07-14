@@ -86,22 +86,6 @@ class RandomTags:
             list_tags.append(self.get_random_tag())
         return list_tags
 
-    def get_random_general(self, n=16):
-        tags = self.get_random_tags(n)
-        tags = list(filter(lambda tag: tag.is_general() and tag.usage_count > 64, tags))
-        if len(tags) < 5:
-            return self.get_random_general()
-        return tags
-
-    def get_random_artists(self, n=100):
-        tags = self.get_random_tags(n)
-        tags = list(filter(lambda tag: tag.is_artist() and tag.usage_count > 256, tags))
-        print(tags)
-        if len(tags) < 1:
-            return self.get_random_artists()
-
-        return tags
-
     def get_random_tag(self):
         text_line = self.get_random_line()
         tag_info_dict = {}

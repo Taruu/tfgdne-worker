@@ -5,7 +5,8 @@ danbooru_file = "tags_files/tags-13-07-2024.danbooru.csv"
 danbooru_artist_file = "tags_files/tags-13-07-2024.artists.danbooru.csv"
 
 [tags]
-quantity_random_tags = 100
+quantity_random_tags = 32
+quantity_random_artists = 2
 
 [static_positive_tags]
 e621 = "high quality, hi res, (fox, fennec, fox tail, fox ears, female), (animal humanoid:1.1), solo, standing,"
@@ -19,16 +20,16 @@ all = " [[worst|low] quality|(low_res:1.1)], ( [tagme | tag_panic]:1.2), (belly:
 
 [a1111_config]
 e621_models = ["EasyFluffV11.2", "indigoFurryMix_se02Vpred"]
-danbooru_models = ["hadrianCulice_culiceV10", "helloflatart_v16gvae"]
+danbooru_models = ["hadrianCulice_culiceV10", "helloflatart_v16gvae", "Ritalin_v10"]
 images_per_model = 6
 #samplings_methods = ['DPM++ 2M', 'DPM++ SDE', 'DPM++ 2M SDE', 'DPM++ 2M SDE Heun', 'DPM++ 2S a', 'DPM++ 3M SDE', 'Euler a', 'Euler', 'LMS', 'Heun', 'DPM2', 'DPM2 a', 'DPM fast', 'DPM adaptive', 'Restart', 'DDIM', 'PLMS', 'UniPC', 'LCM']
 #schedulers_methods = ['automatic', 'uniform', 'karras', 'exponential', 'polyexponential', 'sgm_uniform']
-samplings_methods = ['DPM++ 2M', 'Euler a', 'Euler']
+samplings_methods = ['DPM++ 2M', 'Euler a']
 schedulers_methods = ['automatic']
-sizes_list = ["786x786","786x1024", "512x1024", "512x786"]
+sizes_list = ["512x512", "1024x512", "786x786", "786x1024", "512x1024", "512x786"]
 cfg_scale = 7
 steps = 25
-enable_hr = false
+enable_hr = true
 hr_scale = 2
 hr_second_pass_steps = 20
 denoising_strength = 0.68

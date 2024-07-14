@@ -1,3 +1,4 @@
+import io
 import json
 from dataclasses import dataclass
 from io import BytesIO
@@ -12,8 +13,9 @@ from huggingface_hub import hf_hub_download
 from huggingface_hub.utils import HfHubHTTPError
 from PIL import Image
 from simple_parsing import field, parse_known_args
+import glob
 
-import models
+from workers import models
 
 MODEL_REPO_MAP = {
     "vit": "SmilingWolf/wd-vit-tagger-v3",
@@ -271,13 +273,13 @@ def main(opts: ScriptOptions):
 
 # GiNeus
 class ImageTaggerWorker:
-    def __init__(self, model: str):
+    def __init__(self, model="vit"):
         repo_id = MODEL_REPO_MAP.get(model)
         self.model, self.target_size = load_model_hf(repo_id=repo_id)
         self.labels: LabelData = load_labels_hf(repo_id=repo_id)
-        pass
 
     def get_image_marks(self, image_data: BytesIO):
+        """generate info from model"""
         img_input: Image.Image = Image.open(image_data)
         # ensure image is RGB
         img_input = pil_ensure_rgb(img_input)
@@ -291,18 +293,22 @@ class ImageTaggerWorker:
         inputs = inputs[..., ::-1]
 
         outputs = self.model.predict(inputs)
+        # TODO configs in file
         caption, tag_list, ratings, character, general = get_tags(
             probs=outputs,
             labels=self.labels,
-            gen_threshold=opts.gen_threshold,
-            char_threshold=opts.char_threshold,
+            gen_threshold=0.35,
+            char_threshold=0.7,
         )
         return caption, tag_list, ratings, character, general
 
 
 if __name__ == "__main__":
-    opts, _ = parse_known_args(ScriptOptions)
-    if opts.model not in MODEL_REPO_MAP:
-        print(f"Available models: {list(MODEL_REPO_MAP.keys())}")
-        raise ValueError(f"Unknown model name '{opts.model}'")
-    main(opts)
+    tagger_worker = ImageTaggerWorker()
+    for file in glob.glob("../test_images_folder/*.png"):
+        with open(file, 'rb') as file_bytes:
+            print()
+            print(file)
+            _, _, ratings, _, general = tagger_worker.get_image_marks(io.BytesIO(file_bytes.read()))
+            print(ratings)
+            print(general)
