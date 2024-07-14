@@ -1,3 +1,5 @@
+import time
+
 from config import settings
 from utils.image_generator import A1111ApiWorker
 from utils.post_image import SzurubooruPoster
@@ -35,6 +37,9 @@ while True:
 
     prompt = f"{', '.join(artist_tags)} BREAK {', '.join(tags)}"
     # TODO negative promt generator
-    images = image_gen.generate_image(prompt, "", 1)
-    for image in images:
-        imageboard_poster.post_image(image)
+    try:
+        images = image_gen.generate_image(prompt, "", 1)
+        for image in images:
+            imageboard_poster.post_image(image)
+    except Exception:
+        time.sleep(1)
