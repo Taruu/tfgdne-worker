@@ -79,7 +79,7 @@ class A1111ApiWorker:
 
         pos_prompt = f"""{static_positive_tags} BREAK {prompt}"""
 
-        neg_prompt = f"""{static_negative_tags},{settings["static_negative_tags.all"]} BREAK {negative_prompt}"""
+        neg_prompt = f"""{static_negative_tags} BREAK {settings["static_negative_tags.all"]}{negative_prompt}"""
 
         width, height = random.choice(settings["a1111_config.sizes_list"]).split("x")  # TODO format cheks
 
@@ -112,30 +112,3 @@ class A1111ApiWorker:
             self.current_model_count -= 1
 
         return result_images
-
-
-if __name__ == "__main__":
-    api1111_worker = A1111ApiWorker()
-    for _ in range(50):
-        if api1111_worker.current_model_type is TagSource.danbooru:
-            rt = RandomTags("../tags_files/tags-13-07-2024.danbooru.csv")
-            artist_tags = rt.get_random_tags(n=4)
-            artist_tags = [tag.name for tag in artist_tags]
-        else:
-            rt = RandomTags("../tags_files/tags-21-05-2024.e621.csv")
-            rta = RandomTags("../tags_files/tags-21-05-2024.artists.e621.csv")
-            artist_tags = rta.get_random_tags(n=4)
-            artist_tags = [f"by {tag.name}" for tag in artist_tags]
-
-        tags = rt.get_random_tags(64)
-        tags = [tag.name for tag in tags]
-        promt = f"{','.join(artist_tags)} BREAK {','.join(tags)}"
-
-        images = api1111_worker.generate_image(promt, "", 1)
-
-        for i, image in enumerate(images):
-            if not image.is_safe():
-                continue
-            with open(f"../test_images_folder/image-{image.seed}.png", "wb") as file:
-                print(image.info_text)
-                file.write(image.image_bytes)

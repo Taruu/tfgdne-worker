@@ -74,7 +74,7 @@ if __name__ == "__main__":
     stable_diffusion_worker = StableDiffusion('http://127.0.0.1:7860/', ("user", "test"))
 
     info, images = stable_diffusion_worker.generate(prompt="fox, girl, fennec, dress,", enable_hr=True, hr_scale=1.7,
-                                                    denoising_strength=0.7, steps=25,hr_second_pass_steps=25 )
+                                                    denoising_strength=0.7, steps=25, hr_second_pass_steps=25)
     print(info)
     print(info["infotexts"])
     for i, image in enumerate(images):

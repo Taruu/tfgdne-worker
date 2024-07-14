@@ -14,27 +14,29 @@ danbooru = "high quality, highres, absurdres, (fox ears, fox tail, fox girl, ani
 all = ""
 
 [static_negative_tags]
-e621 = "boring_e621_v4, (knot, bulge, gynomorph,  intersex:1.5), (nude, sex, penis, pussy, nipples, erection, cum, nsfw:1.5), 6 fingers, 7 fingers, 4 fingers, 3 fingers, 2 fingers, 1 finger, (fur), (text, comic, webcomic, signature), (3d \\(artwork\\):1.4)"
+e621 = "boring_e621_v4, (low res, compression artifacts, low quality, invalid tag:1.2), (knot, bulge, gynomorph,  intersex:1.5), (nude, sex, penis, pussy, nipples, erection, cum, nsfw:1.5), 6 fingers, 7 fingers, 4 fingers, 3 fingers, 2 fingers, 1 finger, (fur), (text, comic, webcomic, signature), (3d \\(artwork\\):1.4)"
 danbooru = "EasyNegative, nude, sex, nipples, erection, cum, ejaculation, pussy, penis"
 all = " [[worst|low] quality|(low_res:1.1)], ( [tagme | tag_panic]:1.2), (belly:1.1), (compression_artifacts:1.1), (multiple_scenes:0.3), invalid_tag, disambiguation, mutated hands and fingers, fingernails, bad anatomy, wrong anatomy, deformed, mutation, poorly drawn [hands|face|eyes] ,[ugly:blurry, low [contrast|detailed]:0.33]"
 
 [a1111_config]
 e621_models = ["EasyFluffV11.2", "indigoFurryMix_se02Vpred"]
 danbooru_models = ["hadrianCulice_culiceV10", "helloflatart_v16gvae", "Ritalin_v10"]
-images_per_model = 6
+images_per_model = 5
 #samplings_methods = ['DPM++ 2M', 'DPM++ SDE', 'DPM++ 2M SDE', 'DPM++ 2M SDE Heun', 'DPM++ 2S a', 'DPM++ 3M SDE', 'Euler a', 'Euler', 'LMS', 'Heun', 'DPM2', 'DPM2 a', 'DPM fast', 'DPM adaptive', 'Restart', 'DDIM', 'PLMS', 'UniPC', 'LCM']
 #schedulers_methods = ['automatic', 'uniform', 'karras', 'exponential', 'polyexponential', 'sgm_uniform']
 samplings_methods = ['DPM++ 2M', 'Euler a']
 schedulers_methods = ['automatic']
-sizes_list = ["512x512", "1024x512", "786x786", "786x1024", "512x1024", "512x786"]
+sizes_list = ["1024x512", "786x786", "786x1024", "512x1024", "512x786"]
 cfg_scale = 7
 steps = 25
 enable_hr = true
 hr_scale = 2
 hr_second_pass_steps = 20
 denoising_strength = 0.68
+file_ext = "jpg"
 
-
+[imagebouard_config]
+max_images = 90000
 
 
 

@@ -3,6 +3,7 @@ import requests
 import ujson
 import io
 from config import settings
+import imghdr
 
 
 class SzurubooruApi:
@@ -29,12 +30,12 @@ class SzurubooruApi:
 
         return response_data
 
-    def upload(self, content, **metadata):
+    def upload(self, content: bytes, **metadata):
         return self.post_request(
             'api/posts',
             files={
                 'metadata': (None, ujson.dumps(metadata)),
-                'content': ('image.jpeg', io.BytesIO(content))
+                'content': (f'image.{imghdr.what(io.BytesIO(), h=content[:128])}', io.BytesIO(content))
             }
         )
 
