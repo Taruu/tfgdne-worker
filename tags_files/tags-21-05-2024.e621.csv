@@ -1093,7 +1093,6 @@ id,name,category,post_count
 9923,quill,0,824
 9997,dripping,0,116513
 10032,swimming_pool,0,9568
-10033,morbidly_obese,0,10123
 10064,chasing,0,977
 10098,religion,0,1471
 10104,sound_effects,0,87043
@@ -1281,7 +1280,6 @@ id,name,category,post_count
 14170,thigh_highs,0,122095
 14209,sniper_rifle,0,1340
 14258,newspaper,0,1232
-14266,obese,0,36587
 14289,buizel,5,3390
 14291,restrained,0,36595
 14302,growth,0,23157
@@ -2989,17 +2987,11 @@ id,name,category,post_count
 285801,patreon,3,26902
 286035,fighting_pose,0,2525
 286206,sash_lilac,4,935
-286821,five_nights_at_freddy's,3,35808
-287055,bonnie_(fnaf),4,4103
-287056,chica_(fnaf),4,3169
-287057,foxy_(fnaf),4,6904
-287285,freddy_(fnaf),4,3664
 287472,blue_headwear,0,2205
 287480,white_handwear,0,10334
 288258,hook_hand,0,1759
 288275,winking_at_viewer,0,4486
 288520,faceless_human,0,16262
-288813,golden_freddy_(fnaf),4,869
 288907,white_underwear,0,16955
 289440,anaugi,1,808
 289664,story_in_description,7,21479
@@ -3039,10 +3031,6 @@ id,name,category,post_count
 298940,striped_footwear,0,3888
 299082,ambiguous_feral,0,864
 299647,colored_nails,0,31047
-299926,mangle_(fnaf),4,3056
-299929,toy_bonnie_(fnaf),4,2745
-299930,toy_chica_(fnaf),4,4581
-300217,toy_freddy_(fnaf),4,1070
 300657,finger_claws,0,51729
 301120,implied_transformation,0,3180
 301807,christmas_clothing,0,14242
@@ -3059,8 +3047,6 @@ id,name,category,post_count
 306107,faceless_character,0,96155
 307903,1_eye,0,6181
 308861,tight_bottomwear,0,5606
-309030,five_nights_at_freddy's_3,3,2034
-309140,morbidly_obese_anthro,0,5304
 310834,multi_tail,0,33111
 310938,featureless_chest,0,5122
 311281,bandai_namco,3,61242
@@ -3085,7 +3071,6 @@ id,name,category,post_count
 318033,holding_phone,0,10823
 318131,feet,0,544777
 318233,holding_food,0,9173
-318559,springtrap_(fnaf),4,1778
 319141,megabat,5,1643
 319142,evergreen_tree,0,1197
 319853,chest_wraps,0,1858
@@ -3112,7 +3097,6 @@ id,name,category,post_count
 327761,legband,0,4021
 327940,orange_beak,0,1795
 328083,krystal_(star_fox),4,14987
-330337,five_nights_at_freddy's_4,3,1101
 330513,knock-kneed,0,3460
 331258,circle_eyebrows,0,2662
 332890,eastern_dragon,5,13521
@@ -3624,7 +3608,6 @@ id,name,category,post_count
 638008,eyebrow_through_hair,0,24443
 638227,noelle_holiday,4,2902
 638827,kimacats,1,1001
-640195,morbidly_obese_female,0,4201
 640289,thin_legs,0,2849
 642007,featureless_(disambiguation),6,3942
 642756,black_thigh_highs,0,6515
@@ -3919,7 +3902,6 @@ id,name,category,post_count
 803082,blue_fox_(foxes_in_love),4,2
 808765,bottomless_female,0,8054
 809568,print_topwear,0,2194
-809875,five_nights_at_freddy's:_security_breach,3,10249
 810707,digital_creature,5,1724
 814382,helltaker,3,1897
 817366,nonbinary_(lore),8,12000
@@ -3930,7 +3912,6 @@ id,name,category,post_count
 821268,athletic_anthro,0,22712
 823028,overweight_anthro,0,87375
 824378,glamrock_freddy,4,2276
-824438,obese_anthro,0,19359
 826333,text_on_hat,0,1954
 827825,red_kerchief,0,2824
 827888,headgear_only,0,10280
