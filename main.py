@@ -25,13 +25,15 @@ while True:
     tags = tags_gens[current_type]['general'].get_random_tags(settings["tags.quantity_random_tags"])
     artist_tags = tags_gens[current_type]['artists'].get_random_tags(
         settings["tags.quantity_random_artists"])
+
     if current_type is TagSource.danbooru:
-        pass
+        artist_tags = [tag.name for tag in artist_tags]
     elif current_type is TagSource.e621:
         artist_tags = [f"by {tag.name}" for tag in artist_tags]
-    tags = [tag.name for tag in artist_tags]
 
-    prompt = f"{','.join(artist_tags)} BREAK {','.join(tags)}"
+    tags = [tag.name for tag in tags]
+
+    prompt = f"{', '.join(artist_tags)} BREAK {', '.join(tags)}"
     # TODO negative promt generator
     images = image_gen.generate_image(prompt, "", 1)
     for image in images:
