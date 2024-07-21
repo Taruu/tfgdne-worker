@@ -103,12 +103,17 @@ class A1111ApiWorker:
         }
 
         # logger.info(f"start gen image by {width}x{height}}")
+        has_sleep = False
         current_status = self.stable_diffusion_worker.progress()
-        print(current_status)
-        if (current_status['state']['job_count'] > 0) or (current_status['eta_relative'] > 0):
+        while (current_status['state']['job_count'] > 0) or (current_status['eta_relative'] > 0):
+            has_sleep = True
+            current_status = self.stable_diffusion_worker.progress()
             logger.info(f'SD used now. Go to sleep')
             time.sleep(settings["a1111_config.time_to_sleep_if_has_usage"])
-            # TODO loop check
+
+        if has_sleep:
+            self.current_model_count = 0
+            self.change_checkpoint()
 
         info, images = self.stable_diffusion_worker.generate(**data_dict)
 
