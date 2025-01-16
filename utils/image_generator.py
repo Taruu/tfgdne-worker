@@ -27,6 +27,12 @@ class SDImage:
         return not (value > 0.55)
 
 
+class ComfyApoWorker:
+    def __init__(self):
+        self.comfy_ui_worker = None
+        pass
+
+
 class A1111ApiWorker:
     def __init__(self):
         self.stable_diffusion_worker = StableDiffusion(settings["a1111_point.url"],
