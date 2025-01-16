@@ -1,5 +1,5 @@
 from config import settings
-from workers.random_tags_worker import TagSource, RandomTags
+from workers.random_utils import TagSource, RandomTags
 
 
 class PromptGen:

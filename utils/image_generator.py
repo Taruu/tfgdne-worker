@@ -4,7 +4,7 @@ import time
 from typing import Tuple
 
 from config import settings
-from workers.random_tags_worker import TagSource, RandomTags
+from workers.random_utils import TagSource, RandomTags
 from workers.stable_difusion_a1111_worker import StableDiffusion
 from loguru import logger
 
@@ -37,11 +37,11 @@ class A1111ApiWorker:
         self.current_model_count = 0
         self.checkpoint_list = []
 
-        for e621_model in settings["a1111_config.e621_models"]:
-            self.checkpoint_list.append((e621_model, TagSource.e621))
-
-        for e621_model in settings["a1111_config.danbooru_models"]:
-            self.checkpoint_list.append((e621_model, TagSource.danbooru))
+        for conf_param_name in settings["models"]:
+            if "_models" in conf_param_name:
+                model_tag_source = conf_param_name.split("_")[0]
+                for model in settings['models'][conf_param_name]:
+                    self.checkpoint_list.append((model, model_tag_source))
 
         self.change_checkpoint()
 
@@ -57,7 +57,7 @@ class A1111ApiWorker:
         self.stable_diffusion_worker.set_checkpoint(model_name)
         self.current_model_name = model_name
         self.current_model_type = model_type
-        self.current_model_count = settings["a1111_config.images_per_model"]
+        self.current_model_count = settings["models.images_per_model"]
         logger.info(f'change model to {model_name}, type {model_type}')
 
     def get_queue_count(self) -> int:

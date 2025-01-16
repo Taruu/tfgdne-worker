@@ -25,6 +25,7 @@ class TagType(Enum):
 class TagSource(Enum):
     danbooru = "danbooru"
     e621 = "e621"
+    pony = "pony"
 
 
 class Tag:
@@ -130,6 +131,10 @@ class RandomTags:
         if len(random_line) == 0:
             return self.get_random_line()
         return random_line
+
+
+class RandomStyle:
+    pass
 
 
 if __name__ == "__main__":

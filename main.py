@@ -4,7 +4,7 @@ from config import settings
 from utils.image_generator import A1111ApiWorker
 from utils.post_image import SzurubooruPoster
 from utils.prompt_generator import PromptGen
-from workers.random_tags_worker import TagSource, RandomTags
+from workers.random_utils import TagSource, RandomTags
 
 prompt_gen_danbooru = PromptGen(TagSource.danbooru)
 prompt_gen_e621 = PromptGen(TagSource.e621)
