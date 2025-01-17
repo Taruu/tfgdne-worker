@@ -89,21 +89,21 @@ class A1111ApiWorker:
 
         neg_prompt = f"{static_negative_tags}, {settings['static_negative_tags.all']}, {negative_prompt}"
 
-        width, height = random.choice(settings["a1111_config.sizes_list"]).split("x")  # TODO format cheks
+        width, height = random.choice(settings["a1111_api_config.sizes_list"]).split("x")  # TODO format cheks
 
         data_dict = {
             "width": width,
             "height": height,
             "prompt": pos_prompt,
             "negative_prompt": neg_prompt,
-            "sampler_name": random.choice(settings["a1111_config.samplings_methods"]),
-            "scheduler": random.choice(settings["a1111_config.schedulers_methods"]),
-            "denoising_strength": settings["a1111_config.denoising_strength"],
-            "steps": settings["a1111_config.steps"],
-            "hr_second_pass_steps": settings["a1111_config.hr_second_pass_steps"],
-            "enable_hr": settings["a1111_config.enable_hr"],
-            "hr_scale": settings["a1111_config.hr_scale"],
-            "cfg_scale": settings["a1111_config.cfg_scale"],
+            "sampler_name": random.choice(settings["a1111_api_config.samplings_methods"]),
+            "scheduler": random.choice(settings["a1111_api_config.schedulers_methods"]),
+            "denoising_strength": settings["a1111_api_config.denoising_strength"],
+            "steps": settings["a1111_api_config.steps"],
+            "hr_second_pass_steps": settings["a1111_api_config.hr_second_pass_steps"],
+            "enable_hr": settings["a1111_api_config.enable_hr"],
+            "hr_scale": settings["a1111_api_config.hr_scale"],
+            "cfg_scale": settings["a1111_api_config.cfg_scale"],
             "batch_size": count_to_generate,
             "restore_faces": False
         }
@@ -115,7 +115,7 @@ class A1111ApiWorker:
             has_sleep = True
             current_status = self.stable_diffusion_worker.progress()
             logger.info(f'SD used now. Go to sleep')
-            time.sleep(settings["a1111_config.time_to_sleep_if_has_usage"])
+            time.sleep(settings["a1111_api_config.time_to_sleep_if_has_usage"])
 
         if has_sleep:
             self.current_model_count = 0

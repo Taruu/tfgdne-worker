@@ -1,6 +1,7 @@
 [models]
 e621_models = ["EasyFluffV11.2", "indigoFurryMix_se02Vpred"]
 danbooru_models = ["hadrianCulice_culiceV10", "helloflatart_v16gvae", "Ritalin_v10"]
+
 #samplings_methods = ['DPM++ 2M', 'DPM++ SDE', 'DPM++ 2M SDE', 'DPM++ 2M SDE Heun', 'DPM++ 2S a', 'DPM++ 3M SDE', 'Euler a', 'Euler', 'LMS', 'Heun', 'DPM2', 'DPM2 a', 'DPM fast', 'DPM adaptive', 'Restart', 'DDIM', 'PLMS', 'UniPC', 'LCM']
 #schedulers_methods = ['automatic', 'uniform', 'karras', 'exponential', 'polyexponential', 'sgm_uniform']
 samplings_methods = ['DPM++ 2M', 'Euler a', 'DPM++ 2M SDE Heun', 'DPM++ 3M SDE']
@@ -8,7 +9,6 @@ schedulers_methods = ['automatic', 'karras', 'exponential', 'polyexponential']
 sizes_list = ["1024x512", "786x786", "786x1024", "512x1024", "512x786"]
 cfg_scale = 7
 steps = 25
-
 images_per_model = 5
 
 [tags_files]
@@ -36,7 +36,12 @@ danbooru = "EasyNegative, nude, sex, nipples, erection, cum, ejaculation, pussy,
 pony = ""
 all = " [[worst|low] quality|(low_res:1.1)], ( [tagme | tag_panic]:1.2), (belly:1.1), (compression_artifacts:1.1), (multiple_scenes:0.3), invalid_tag, disambiguation, mutated hands and fingers, fingernails, bad anatomy, wrong anatomy, deformed, mutation, poorly drawn [hands|face|eyes] ,[ugly:blurry, low [contrast|detailed]:0.33]"
 
-[a1111_config]
+[comfy_api_config]
+workflow_for_models = [
+    {"EasyFluffV11.2" = "workflow1.json"}
+]
+
+[a1111_api_config]
 enable_hr = true
 hr_scale = 2
 hr_second_pass_steps = 20

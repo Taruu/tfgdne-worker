@@ -1,3 +1,4 @@
+import time
 import uuid
 
 import requests
@@ -9,20 +10,31 @@ import uuid
 import json
 import urllib.request
 import urllib.parse
+from urllib.parse import urlparse
 
 
 class Comfy:
-    def __init__(self, endpoint_url, workflow, token=None):
+    def __init__(self, endpoint_url, token=None):
         self.endpoint_url = endpoint_url
+        self.endpoint_url_parsed = urlparse(endpoint_url)
 
         self.client_id = str(uuid.uuid4())
         self.token = token
 
         self.websocket = websocket.WebSocket()
+        self._image_timeout = 60 * 4
 
-    def get_image(self):
-        self.websocket.connected("ws://{}/ws?clientId={}&token={}")
+    def get_images_from_prompt(self, prompt_id : int):
+        token = f"&token={self.token}" if self.token else ""
 
+        self.websocket.connected(f"ws://{self.endpoint_url_parsed.netloc}/ws?clientId={self.client_id}{token}")
+        end_time = time.time() + self._image_timeout
+        while time.time() > end_time:
+            output = self.websocket.recv()
+            if isinstance(output, str):
+                message = json.loads(output)
+                data = message["data"]
+                if (data["node"] is None) and (data["prompt_id"] ==
         self.websocket.close()
         pass
 
