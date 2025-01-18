@@ -32,6 +32,19 @@ class ComfyApoWorker:
         self.comfy_ui_worker = None
         pass
 
+    def change_checkpoint(self):
+        pass
+
+    def get_queue_count(self):
+        pass
+
+    def get_progress(self):
+        pass
+
+    def generate_image(self, prompt: str, negative_prompt: str, artist_prompt: str, count_to_generate=1) -> list[
+        SDImage]:
+        pass
+
 
 class A1111ApiWorker:
     def __init__(self):
