@@ -1,10 +1,12 @@
 import io
+import json
 import random
 import time
 from sched import scheduler
 from typing import Tuple
 
 from config import settings
+from workers.comfy_worker import Comfy
 from workers.random_utils import TagSource, RandomTags
 from workers.stable_difusion_a1111_worker import StableDiffusion
 from loguru import logger
@@ -28,23 +30,45 @@ class SDImage:
         return not (value > 0.55)
 
 
-class ComfyApoWorker:
+class ComfyApiWorker:
     def __init__(self):
-        self.comfy_ui_worker = None
-        pass
+        self.comfy_worker = Comfy(settings["comfy_point"], settings["token"])
+        self.current_model_name = {}
+        self.checkpoint_list = []
+
+        for model in settings.get("models"):
+            if not "comfy_workflow" in model:
+                continue
+            comfy_workflow = self._read_workflow(model["name"])
+            model_with_workflow = model
+            model_with_workflow["comfy_workflow"] = comfy_workflow
+            self.checkpoint_list.append(model_with_workflow)
+
+        if not len(self.checkpoint_list):
+            raise Exception("No any config for comfy workflow")
+
+        self.current_model_name = random.choice(self.checkpoint_list)
+
+    def _read_workflow(self, name: str) -> dict:
+        with open(f"{settings['comfy_api_config']['workflow_folder']}/{name}.json") as file:
+            return json.load(file)
 
     def change_checkpoint(self):
-        pass
-
-    def get_queue_count(self):
-        pass
+        self.current_model_name = random.choice(self.checkpoint_list)
 
     def get_progress(self):
+
         pass
 
     def generate_image(self, prompt: str, negative_prompt: str, artist_prompt: str, count_to_generate=1) -> list[
         SDImage]:
-        pass
+
+        current_status = self.comfy_worker.get_queue()
+        while (len(current_status['queue_running']) > 0) or (len(current_status['queue_pending']) > 0):
+            has_sleep = True
+            current_status = self.comfy_worker.get_queue()
+            logger.info(f'Comfy used now. Go to sleep')
+            time.sleep(settings["comfy_api_config.time_to_sleep_if_has_usage"])
 
 
 class A1111ApiWorker:

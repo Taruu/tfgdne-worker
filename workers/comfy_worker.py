@@ -25,6 +25,7 @@ class Comfy:
         self.token = token
 
         self.websocket = websocket.WebSocket()
+        self.current_status = None
 
         ws_token = f"&token={self.token}" if self.token else ""
         self.websocket.connect(f"ws://{self.endpoint_url_parsed.netloc}/ws?clientId={self.client_id}{ws_token}")
@@ -43,7 +44,9 @@ class Comfy:
 
     def _get_history(self, prompt_id):
         return self._method_api("history", prompt_id=prompt_id)
-        pass
+
+    def get_queue(self):
+        return self._method_api("queue")
 
     def get_images_from_prompt(self, prompt_id: int):
 
@@ -52,7 +55,7 @@ class Comfy:
         print(time.time(), end_time, time.time() > end_time)
         while time.time() < end_time:
             output = self.websocket.recv()
-            print("out", output)
+            self.current_status = output
             if isinstance(output, str):
                 message = json.loads(output)
                 if message["type"] != 'executing':
@@ -194,20 +197,24 @@ if __name__ == "__main__":
     """
 
     comf_worker = Comfy("http://192.168.16.42:7007", settings["comfy_point"]["token"])
-    prompt = json.loads(prompt_text)
-    # set the text prompt for our positive CLIPTextEncode
-    prompt["6"]["inputs"]["text"] = "masterpiece best quality man"
-
-    # set the seed for our KSampler node
-    prompt["3"]["inputs"]["seed"] = 5
-    with open("../comfy-workflows/2 Pass Upscale Pony Only Preview(1).json") as file:
-        prompt = json.load(file)
-
-    seed = random.random() * 10_0000
-    prompt["3"]['inputs']["seed"] = int(seed)
-    prompt["39"]['inputs']["seed"] = int(seed)
-    print(prompt)
-    result = comf_worker.queue_workflow(prompt)
-    print("resinque", result.get("prompt_id"))
-    next_res = comf_worker.get_images_from_prompt(result.get("prompt_id"))
-    print(len(next_res.get(result.get("prompt_id"))))
+    print()
+    print(comf_worker.get_queue())
+    for key, item in comf_worker.get_queue().items():
+        print(key, item)
+    # prompt = json.loads(prompt_text)
+    # # set the text prompt for our positive CLIPTextEncode
+    # prompt["6"]["inputs"]["text"] = "masterpiece best quality man"
+    #
+    # # set the seed for our KSampler node
+    # prompt["3"]["inputs"]["seed"] = 5
+    # with open("../comfy-workflows/2 Pass Upscale Pony Only Preview(1).json") as file:
+    #     prompt = json.load(file)
+    #
+    # seed = random.random() * 10_0000
+    # prompt["3"]['inputs']["seed"] = int(seed)
+    # prompt["39"]['inputs']["seed"] = int(seed)
+    # print(prompt)
+    # result = comf_worker.queue_workflow(prompt)
+    # print("resinque", result.get("prompt_id"))
+    # next_res = comf_worker.get_images_from_prompt(result.get("prompt_id"))
+    # print(len(next_res.get(result.get("prompt_id"))))

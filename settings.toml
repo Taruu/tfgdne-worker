@@ -77,13 +77,17 @@ pony = ""
 all = ""
 
 [static_negative_tags]
-e621 = "boring_e621_v4, (low res, compression artifacts, low quality, invalid tag:1.2), (knot, bulge, gynomorph,  intersex:1.5), (nude, sex, penis, pussy, nipples, erection, cum, nsfw:1.5), 6 fingers, 7 fingers, 4 fingers, 3 fingers, 2 fingers, 1 finger, (fur), (text, comic, webcomic, signature), (3d \\(artwork\\):1.4)"
-danbooru = "EasyNegative, nude, sex, nipples, erection, cum, ejaculation, pussy, penis"
+e621 = "(low res, compression artifacts, low quality, invalid tag:1.2), (knot, bulge, gynomorph,  intersex:1.5), (nude, sex, penis, pussy, nipples, erection, cum, nsfw:1.5), 6 fingers, 7 fingers, 4 fingers, 3 fingers, 2 fingers, 1 finger, (fur), (text, comic, webcomic, signature), (3d \\(artwork\\):1.4)"
+danbooru = "nude, sex, nipples, erection, cum, ejaculation, pussy, penis"
 pony = ""
-all = " [[worst|low] quality|(low_res:1.1)], ( [tagme | tag_panic]:1.2), (belly:1.1), (compression_artifacts:1.1), (multiple_scenes:0.3), invalid_tag, disambiguation, mutated hands and fingers, fingernails, bad anatomy, wrong anatomy, deformed, mutation, poorly drawn [hands|face|eyes] ,[ugly:blurry, low [contrast|detailed]:0.33]"
+all = ""
 
 [comfy_api_config]
 workflow_folder = "comfy-workflows"
+hr_second_pass_steps = 20
+denoising_strength = 0.68
+time_to_sleep_if_has_usage = 1800
+
 
 [a1111_api_config]
 enable_hr = true

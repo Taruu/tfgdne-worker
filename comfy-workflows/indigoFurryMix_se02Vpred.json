@@ -1,0 +1,178 @@
+{
+  "3": {
+    "inputs": {
+      "seed": 553294477896138,
+      "steps": 15,
+      "cfg": 4,
+      "sampler_name": "dpmpp_2s_ancestral",
+      "scheduler": "karras",
+      "denoise": 1,
+      "model": [
+        "54",
+        0
+      ],
+      "positive": [
+        "6",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ],
+      "latent_image": [
+        "44",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "5": {
+    "inputs": {
+      "width": 768,
+      "height": 1024,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "Empty Latent Image"
+    }
+  },
+  "6": {
+    "inputs": {
+      "text": "",
+      "clip": [
+        "20",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "7": {
+    "inputs": {
+      "text": "",
+      "clip": [
+        "20",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "13": {
+    "inputs": {
+      "samples": [
+        "39",
+        0
+      ],
+      "vae": [
+        "54",
+        2
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "20": {
+    "inputs": {
+      "stop_at_clip_layer": -2,
+      "clip": [
+        "54",
+        1
+      ]
+    },
+    "class_type": "CLIPSetLastLayer",
+    "_meta": {
+      "title": "CLIP Set Last Layer"
+    }
+  },
+  "31": {
+    "inputs": {
+      "images": [
+        "13",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "38": {
+    "inputs": {
+      "version": "SD 1.x",
+      "upscale": 2,
+      "latent": [
+        "3",
+        0
+      ]
+    },
+    "class_type": "NNLatentUpscale",
+    "_meta": {
+      "title": "NNLatentUpscale"
+    }
+  },
+  "39": {
+    "inputs": {
+      "seed": 553294477896138,
+      "steps": 15,
+      "cfg": 4,
+      "sampler_name": "dpmpp_2s_ancestral",
+      "scheduler": "karras",
+      "denoise": 0.7000000000000001,
+      "model": [
+        "54",
+        0
+      ],
+      "positive": [
+        "6",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ],
+      "latent_image": [
+        "38",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "44": {
+    "inputs": {
+      "folder_path": "temp",
+      "enabled": true,
+      "anything": [
+        "5",
+        0
+      ]
+    },
+    "class_type": "TempCleaner",
+    "_meta": {
+      "title": "TempCleaner"
+    }
+  },
+  "54": {
+    "inputs": {
+      "config_name": "indigoFurryMix_se02Vpred.yaml",
+      "ckpt_name": "indigoFurryMix_se02Vpred.safetensors"
+    },
+    "class_type": "CheckpointLoader",
+    "_meta": {
+      "title": "Load Checkpoint With Config (DEPRECATED)"
+    }
+  }
+}
