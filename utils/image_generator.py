@@ -1,6 +1,7 @@
 import io
 import random
 import time
+from sched import scheduler
 from typing import Tuple
 
 from config import settings
@@ -56,11 +57,8 @@ class A1111ApiWorker:
         self.current_model_count = 0
         self.checkpoint_list = []
 
-        for conf_param_name in settings["models"]:
-            if "_models" in conf_param_name:
-                model_tag_source = conf_param_name.split("_")[0]
-                for model in settings['models'][conf_param_name]:
-                    self.checkpoint_list.append((model, model_tag_source))
+        for model_info in settings["models"]["list"]:
+            self.checkpoint_list.append((model_info["name"], model_info["tags_type"]))
 
         self.change_checkpoint()
 
@@ -109,8 +107,8 @@ class A1111ApiWorker:
             "height": height,
             "prompt": pos_prompt,
             "negative_prompt": neg_prompt,
-            "sampler_name": random.choice(settings["a1111_api_config.samplings_methods"]),
-            "scheduler": random.choice(settings["a1111_api_config.schedulers_methods"]),
+            "sampler_name": random.choice(settings["models_samplers"].values()),
+            "scheduler": random.choice(settings["models_shedulers"].values()),
             "denoising_strength": settings["a1111_api_config.denoising_strength"],
             "steps": settings["a1111_api_config.steps"],
             "hr_second_pass_steps": settings["a1111_api_config.hr_second_pass_steps"],

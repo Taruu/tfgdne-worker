@@ -1,15 +1,61 @@
 [models]
-e621_models = ["EasyFluffV11.2", "indigoFurryMix_se02Vpred"]
-danbooru_models = ["hadrianCulice_culiceV10", "helloflatart_v16gvae", "Ritalin_v10"]
-
-#samplings_methods = ['DPM++ 2M', 'DPM++ SDE', 'DPM++ 2M SDE', 'DPM++ 2M SDE Heun', 'DPM++ 2S a', 'DPM++ 3M SDE', 'Euler a', 'Euler', 'LMS', 'Heun', 'DPM2', 'DPM2 a', 'DPM fast', 'DPM adaptive', 'Restart', 'DDIM', 'PLMS', 'UniPC', 'LCM']
-#schedulers_methods = ['automatic', 'uniform', 'karras', 'exponential', 'polyexponential', 'sgm_uniform']
-samplings_methods = ['DPM++ 2M', 'Euler a', 'DPM++ 2M SDE Heun', 'DPM++ 3M SDE']
-schedulers_methods = ['automatic', 'karras', 'exponential', 'polyexponential']
+list = [
+    { name = "EasyFluffV11.2", tags_type = "e621", comfy_workflow = "EasyFluffV11.2" },
+    { name = "indigoFurryMix_se02Vpred", tags_type = "e621", comfy_workflow = "indigoFurryMix_se02Vpred" },
+    { name = "ponyDiffusionV6XL_v6StartWithThisOne", tags_type = "pony", comfy_workflow = "ponyDiffusionV6XL_v6StartWithThisOne" },
+]
 sizes_list = ["1024x512", "786x786", "786x1024", "512x1024", "512x786"]
 cfg_scale = 7
 steps = 25
 images_per_model = 5
+
+[models_samplers]
+#left ComfyUI right alias A1111
+#euler = "Euler"
+#euler_cfg_pp = "Euler"
+euler_ancestral = "Euler a"
+euler_ancestral_cfg_pp = "Euler a"
+#heun = "Heun"
+#heunpp2 = "Heun"
+#lms = "LMS"
+#dpm_2 = "DPM2"
+#dpm_2_ancestral = "DPM2 a"
+#dpm_fast = "DPM fast"
+#dpm_adaptive = "DPM adaptive"
+#dpmpp_2s_ancestral = "DPM++ 2S a"
+#dpmpp_2s_ancestral_cfg_pp = "DPM++ 2S a"
+#dpmpp_sde = "DPM++ SDE"
+#dpmpp_sde_gpu = "DPM++ SDE"
+#dpmpp_2m = "DPM++ 2M"
+#dpmpp_2m_cfg_pp = "DPM++ 2M"
+#dpmpp_2m_sde = "DPM++ 2M SDE"
+#dpmpp_2m_sde_gpu = "DPM++ 2M SDE"
+dpmpp_3m_sde = "DPM++ 3M SDE"
+dpmpp_3m_sde_gpu = "DPM++ 3M SDE"
+#ddpm = ""
+#lcm = "LCM"
+#ipndm = ""
+#ipndm_v = ""
+#deis = ""
+#res_multistep = ""
+#res_multistep_cfg_pp = ""
+#ddim = "DDIM"
+uni_pc = "UniPC"
+uni_pc_bh2 = "UniPC"
+
+[models_shedulers]
+#left ComfyUI right alias A1111
+normal = "Automatic"
+karras = "Karras"
+exponential = "Exponential"
+#sgm_uniform = "SGM Uniform"
+#simple = "Simple"
+#ddim_uniform = "DDIM"
+#beta = "Beta"
+#linear_quadratic = "Align Your Steps"
+#kl_optimal = "KL Optimal"
+
+
 
 [tags_files]
 danbooru_file = "tags_files/tags-13-07-2024.danbooru.csv"
@@ -22,7 +68,7 @@ quantity_random_tags = 32
 quantity_random_artists = 2
 
 [style]
-style_folder = "tags_files/syles"
+style_folder = "tags_files/style"
 
 [static_positive_tags]
 e621 = "high quality, hi res, (fox, fennec, fox tail, fox ears, female), (animal humanoid:1.1), solo, standing,"
@@ -37,9 +83,7 @@ pony = ""
 all = " [[worst|low] quality|(low_res:1.1)], ( [tagme | tag_panic]:1.2), (belly:1.1), (compression_artifacts:1.1), (multiple_scenes:0.3), invalid_tag, disambiguation, mutated hands and fingers, fingernails, bad anatomy, wrong anatomy, deformed, mutation, poorly drawn [hands|face|eyes] ,[ugly:blurry, low [contrast|detailed]:0.33]"
 
 [comfy_api_config]
-workflow_for_models = [
-    {"EasyFluffV11.2" = "workflow1.json"}
-]
+workflow_folder = "comfy-workflows"
 
 [a1111_api_config]
 enable_hr = true
@@ -51,6 +95,4 @@ time_to_sleep_if_has_usage = 1800
 
 [imagebouard_config]
 max_images = 90000 #if you set less then set before all older images has beed removed
-
-
 
