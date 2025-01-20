@@ -34,7 +34,7 @@ class SDImage:
 class ComfyApiWorker:
     def __init__(self):
         self.comfy_worker = Comfy(settings["comfy_point"], settings["token"])
-        self.current_model_name = {}
+        self.current_model_info = {}
         self.checkpoint_list = []
 
         for model in settings.get("models"):
@@ -48,50 +48,69 @@ class ComfyApiWorker:
         if not len(self.checkpoint_list):
             raise Exception("No any config for comfy workflow")
 
-        self.current_model_name = random.choice(self.checkpoint_list)
+        self.current_model_info = random.choice(self.checkpoint_list)
 
     def _read_workflow(self, name):
         with open(f"{settings['comfy_api_config']['workflow_folder']}/{name}.json") as file:
             return json.load(file)
 
-    def _fill_workflow(self, workflow: dict, positive_prompt: str, negative_prompt: str, sampler: str, sheduler: str,
-                       cfg_scale: int, seed: int):
+    def _fill_workflow(self, workflow: dict, positive_prompt: str, negative_prompt: str, seed: int):
         local_workflow = copy.deepcopy(workflow)
         positive_block_id = None
         negative_block_id = None
 
         for key, value in local_workflow.items():
             if "inputs" in value:
+                if "cfg" in value["inputs"]:
+                    local_workflow[key]["inputs"]["cfg"] = settings["comfy_api_config"]["cfg_scale"]
                 if "seed" in value["inputs"]:
                     local_workflow[key]["inputs"]["seed"] = seed
                 if "sampler_name" in value["inputs"]:
-                    pass
+                    local_workflow[key]["inputs"]["sampler_name"] = random.choice(settings["models_samplers"].keys()),
                 if "scheduler" in value["inputs"]:
-                    pass
+                    local_workflow[key]["inputs"]["scheduler"] = random.choice(settings["models_shedulers"].keys()),
                 if "positive" in value["inputs"]:
-                    positive_block_id = value["inputs"]["positive"][0]
+                    positive_block_id = local_workflow[key]["inputs"]["positive"][0]
                 if "negative" in value["inputs"]:
-                    negative_block_id = value["inputs"]["negative"][0]
+                    negative_block_id = local_workflow[key]["inputs"]["negative"][0]
+                if ("width" in value["inputs"]) and ("height" in value["inputs"]):
+                    width, height = random.choice(["models"]["sizes_list"]).split("x")
+                    local_workflow[key]["inputs"]["width"] = int(width)
+                    local_workflow[key]["inputs"]["height"] = int(height)
 
         if not negative_block_id and not positive_block_id:
             raise Exception(f"Where is text prompt?")
 
+        local_workflow[positive_block_id]["inputs"]["text"] += positive_prompt
+        local_workflow[negative_block_id]["inputs"]["text"] += negative_prompt
+
+        return local_workflow
+
     def change_checkpoint(self):
-        self.current_model_name = random.choice(self.checkpoint_list)
+        self.current_model_info = random.choice(self.checkpoint_list)
 
     def get_progress(self):
 
         pass
 
-    def generate_image(self, prompt: str, negative_prompt: str, artist_prompt: str, count_to_generate=1) -> list[
+    def generate_image(self, prompt: str, negative_prompt: str, artist_prompt: str) -> list[
         SDImage]:
+        # I think is bad logic? When random inside
+        static_positive_tags = settings[f"static_positive_tags.{self.current_model_info.tags_type}"]
+        static_negative_tags = settings[f"static_negative_tags.{self.current_model_info.tags_type}"]
 
+        current_workflow = self._read_workflow(self.current_model_info.name)
+        generate_workflow = self._fill_workflow(f"{prompt},{artist_prompt},{static_positive_tags}",
+                                                f"{static_negative_tags},{negative_prompt}")
         current_status = self.comfy_worker.get_queue()
+
         while (len(current_status['queue_running']) > 0) or (len(current_status['queue_pending']) > 0):
-            has_sleep = True
             current_status = self.comfy_worker.get_queue()
             logger.info(f'Comfy used now. Go to sleep')
             time.sleep(settings["comfy_api_config.time_to_sleep_if_has_usage"])
+
+        queue_result = self.comfy_worker.queue_workflow(generate_workflow)
+        prompt_id = queue_result.get("prompt_id")
 
 
 class A1111ApiWorker:
