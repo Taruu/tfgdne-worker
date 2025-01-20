@@ -1,3 +1,4 @@
+import copy
 import io
 import json
 import random
@@ -49,9 +50,31 @@ class ComfyApiWorker:
 
         self.current_model_name = random.choice(self.checkpoint_list)
 
-    def _read_workflow(self, name: str) -> dict:
+    def _read_workflow(self, name):
         with open(f"{settings['comfy_api_config']['workflow_folder']}/{name}.json") as file:
             return json.load(file)
+
+    def _fill_workflow(self, workflow: dict, positive_prompt: str, negative_prompt: str, sampler: str, sheduler: str,
+                       cfg_scale: int, seed: int):
+        local_workflow = copy.deepcopy(workflow)
+        positive_block_id = None
+        negative_block_id = None
+
+        for key, value in local_workflow.items():
+            if "inputs" in value:
+                if "seed" in value["inputs"]:
+                    local_workflow[key]["inputs"]["seed"] = seed
+                if "sampler_name" in value["inputs"]:
+                    pass
+                if "scheduler" in value["inputs"]:
+                    pass
+                if "positive" in value["inputs"]:
+                    positive_block_id = value["inputs"]["positive"][0]
+                if "negative" in value["inputs"]:
+                    negative_block_id = value["inputs"]["negative"][0]
+
+        if not negative_block_id and not positive_block_id:
+            raise Exception(f"Where is text prompt?")
 
     def change_checkpoint(self):
         self.current_model_name = random.choice(self.checkpoint_list)

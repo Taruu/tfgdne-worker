@@ -49,10 +49,9 @@ class Comfy:
         return self._method_api("queue")
 
     def get_images_from_prompt(self, prompt_id: int):
-
         end_time = time.time() + self._image_timeout
         output_images_by_node_id = {}
-        print(time.time(), end_time, time.time() > end_time)
+
         while time.time() < end_time:
             output = self.websocket.recv()
             self.current_status = output
@@ -70,12 +69,11 @@ class Comfy:
             raise Exception("Timeout image get form prompt")
 
         history = self._get_history(prompt_id).get(prompt_id)
-        print("hist", history)
+
         for node_id, node_output in history.get('outputs').items():
             if "images" in node_output:
                 images_output = []
                 for image_info in node_output.get("images"):
-                    print("image_info", image_info)
                     image_data = self._get_image(image_info)
                     images_output.append(image_data)
                 output_images_by_node_id[node_id] = images_output
