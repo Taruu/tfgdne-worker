@@ -100,7 +100,7 @@ class ComfyApiWorker:
         static_negative_tags = settings[f"static_negative_tags.{self.current_model_info.tags_type}"]
 
         current_workflow = self._read_workflow(self.current_model_info.name)
-        generate_workflow = self._fill_workflow(f"{prompt},{artist_prompt},{static_positive_tags}",
+        generate_workflow = self._fill_workflow(current_workflow, f"{prompt},{artist_prompt},{static_positive_tags}",
                                                 f"{static_negative_tags},{negative_prompt}")
         current_status = self.comfy_worker.get_queue()
 

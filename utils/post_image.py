@@ -4,6 +4,11 @@ from workers.szurubooru_post_worker import SzurubooruApi
 from loguru import logger
 
 
+class DanbooruPoster:
+    def __init__(self):
+        pass
+
+
 class SzurubooruPoster:
     def __init__(self):
         self.szurubooru_api = SzurubooruApi(settings["szurubooru.url"], settings["szurubooru.login"],
