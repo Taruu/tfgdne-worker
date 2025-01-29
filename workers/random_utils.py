@@ -75,7 +75,7 @@ class RandomTags:
             self.csv_type = TagSource.pony
             self.header = "id,name,type,usage_count".split(',')
             self.type_dict_convert = {0: TagType.general, 1: TagType.artist, 2: TagType.character, 3: TagType.copyright,
-                                      4: TagType.meta}
+                                      4: TagType.character, 5: TagType.general, 6: TagType.meta, 7: TagType.meta}
         else:
             raise Exception("Not correct file (ext)")
 
