@@ -94,7 +94,7 @@ class ComfyApiWorker:
 
         local_workflow[positive_block_id]["inputs"]["text"] += positive_prompt
         local_workflow[negative_block_id]["inputs"]["text"] += negative_prompt
-
+        print("TODO WORKFLOW", local_workflow)
         return local_workflow
 
     def change_checkpoint(self):
@@ -111,8 +111,9 @@ class ComfyApiWorker:
         AIImage]:
         # I think is bad logic? When random inside
         static_positive_tags = settings[f"static_positive_tags.{self.current_model_info.get('tags_type').value}"]
+        print(static_positive_tags)
         static_negative_tags = settings[f"static_negative_tags.{self.current_model_info.get('tags_type').value}"]
-
+        print(static_negative_tags)
         current_workflow = self._read_workflow(self.current_model_info.get("name"))
 
         generate_workflow = self._fill_workflow(current_workflow, f"{prompt},{artist_prompt},{static_positive_tags}",
