@@ -28,6 +28,7 @@ class Comfy:
         self.current_status = None
 
         ws_token = f"&token={self.token}" if self.token else ""
+        print(f"ws://{self.endpoint_url_parsed.netloc}/ws?clientId={self.client_id}{ws_token}")
         self.websocket.connect(f"ws://{self.endpoint_url_parsed.netloc}/ws?clientId={self.client_id}{ws_token}")
 
         self._image_timeout = 60 * 10
@@ -199,20 +200,22 @@ if __name__ == "__main__":
     print(comf_worker.get_queue())
     for key, item in comf_worker.get_queue().items():
         print(key, item)
-    # prompt = json.loads(prompt_text)
-    # # set the text prompt for our positive CLIPTextEncode
-    # prompt["6"]["inputs"]["text"] = "masterpiece best quality man"
-    #
-    # # set the seed for our KSampler node
-    # prompt["3"]["inputs"]["seed"] = 5
-    # with open("../comfy-workflows/2 Pass Upscale Pony Only Preview(1).json") as file:
-    #     prompt = json.load(file)
-    #
-    # seed = random.random() * 10_0000
-    # prompt["3"]['inputs']["seed"] = int(seed)
-    # prompt["39"]['inputs']["seed"] = int(seed)
-    # print(prompt)
-    # result = comf_worker.queue_workflow(prompt)
-    # print("resinque", result.get("prompt_id"))
-    # next_res = comf_worker.get_images_from_prompt(result.get("prompt_id"))
-    # print(len(next_res.get(result.get("prompt_id"))))
+    prompt = json.loads(prompt_text)
+    # set the text prompt for our positive CLIPTextEncode
+    prompt["6"]["inputs"]["text"] = "masterpiece best quality man"
+
+    # set the seed for our KSampler node
+    prompt["3"]["inputs"]["seed"] = 5
+    with open("../comfy-workflows/EasyFluffV11.2.json") as file:
+        prompt = json.load(file)
+
+    seed = random.random() * 10_0000
+    prompt["3"]['inputs']["seed"] = int(seed)
+    prompt["39"]['inputs']["seed"] = int(seed)
+    print(prompt)
+    result = comf_worker.queue_workflow(prompt)
+    print("resinque", result.get("prompt_id"))
+    next_res = comf_worker.get_images_from_prompt(result.get("prompt_id"))
+    print()
+    for key, value in next_res.items():
+        print(key, type(value), len(value), type(value[0]))

@@ -1,5 +1,5 @@
 from config import settings
-from utils.image_generator import SDImage
+from utils.image_generator import AIImage
 from workers.szurubooru_post_worker import SzurubooruApi
 from loguru import logger
 
@@ -33,21 +33,24 @@ class SzurubooruPoster:
                 print(result)
                 posts_to_remove_count -= 1
 
-    def post_image(self, sd_image: SDImage):
-        if not sd_image.is_safe():
+    def post_image(self, ai_image: AIImage):
+        if not ai_image.is_safe():
             return None
 
-        post_tags = list(sd_image.general_tags.keys())
-        post_tags.append(sd_image.model_name)
+        post_tags = list(ai_image.general_tags.keys())
+        post_tags.append(ai_image.model_name)
 
-        safety = "safe" if sd_image.ratings.get("general") > sd_image.ratings.get("sensitive") else "sketchy"
+        safety = "safe" if ai_image.ratings.get("general") > ai_image.ratings.get("sensitive") else "sketchy"
 
-        post = self.szurubooru_api.upload(content=sd_image.image_bytes, tags=post_tags, safety=safety)
+        post = self.szurubooru_api.upload(content=ai_image.image_bytes, tags=post_tags, safety=safety)
         new_post_id = post.get("id")
 
         if not post:
             return None
         logger.info(f"post image id {new_post_id}")
-        self.szurubooru_api.comment(sd_image.info_text, new_post_id)
+
+        if len(ai_image.info_text):
+            self.szurubooru_api.comment(ai_image.info_text, new_post_id)
+
         if self._get_total_posts_count() > self.max_images:
             self._remove_posts_out_limits()

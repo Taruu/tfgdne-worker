@@ -97,6 +97,7 @@ class RandomTags:
         tag_info_dict = {}
         for colum_name, value in zip(self.header, text_line.strip().split(',')):
             tag_info_dict.update({colum_name: value})
+
         tag_id = tag_info_dict.pop("id")
         name = tag_info_dict.pop("name")
 
@@ -106,7 +107,7 @@ class RandomTags:
                 value_type = 0
             tag_type = self.type_dict_convert.get(int(value_type))
             tag_usage_count = tag_info_dict.pop('post_count')
-        elif self.csv_type == TagSource.danbooru:
+        elif self.csv_type == TagSource.danbooru or self.csv_type == TagSource.pony:
             value_type = tag_info_dict.pop("type")
             if not value_type.isnumeric():
                 value_type = 0

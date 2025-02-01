@@ -62,6 +62,8 @@ danbooru_file = "tags_files/tags-13-07-2024.danbooru.csv"
 danbooru_artist_file = "tags_files/tags-13-07-2024.artists.danbooru.csv"
 e621_file = "tags_files/tags-21-05-2024.e621.csv"
 e621_artist_file = "tags_files/tags-21-05-2024.artists.e621.csv"
+pony_file = "tags_files/tags-21-05-2024.pony.csv"
+pony_artist_file = "tags_files/tags-21-05-2024.artists.pony.csv"
 
 [tags]
 quantity_random_tags = 32
@@ -73,13 +75,13 @@ style_folder = "tags_files/style"
 [static_positive_tags]
 e621 = "high quality, hi res, (fox, fennec, fox tail, fox ears, female), (animal humanoid:1.1), solo, standing,"
 danbooru = "high quality, highres, absurdres, (fox ears, fox tail, fox girl, animal ears, 1girl), solo"
-pony = ""
+pony = "high quality, hi res, (fox, fennec, fox tail, fox ears, female), (animal humanoid:1.1), solo, standing,"
 all = ""
 
 [static_negative_tags]
 e621 = "(low res, compression artifacts, low quality, invalid tag:1.2), (knot, bulge, gynomorph,  intersex:1.5), (nude, sex, penis, pussy, nipples, erection, cum, nsfw:1.5), 6 fingers, 7 fingers, 4 fingers, 3 fingers, 2 fingers, 1 finger, (fur), (text, comic, webcomic, signature), (3d \\(artwork\\):1.4)"
 danbooru = "nude, sex, nipples, erection, cum, ejaculation, pussy, penis"
-pony = ""
+pony = "nude, sex, nipples, erection, cum, ejaculation, pussy, penisб (low res, compression artifacts, low quality, invalid tag:1.2), (knot, bulge, gynomorph,  intersex:1.5), (nude, sex, penis, pussy, nipples, erection, cum, nsfw:1.5), 6 fingers, 7 fingers, 4 fingers, 3 fingers, 2 fingers, 1 finger, (fur), (text, comic, webcomic, signature), (3d \\(artwork\\):1.4)"
 all = ""
 
 [comfy_api_config]

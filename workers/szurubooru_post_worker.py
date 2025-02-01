@@ -14,6 +14,7 @@ class SzurubooruApi:
         ).decode('ASCII') if login else None
 
     def post_request(self, method, **data):
+        print(method, data)
         response = requests.post(
             f'{self.endpoint_url}/{method}',
             headers={
@@ -22,7 +23,6 @@ class SzurubooruApi:
             },
             **data
         )
-
         response_data = response.json()
 
         if response.status_code != 200:
@@ -34,7 +34,7 @@ class SzurubooruApi:
         return self.post_request(
             'api/posts',
             files={
-                'metadata': (None, ujson.dumps(metadata)),
+                'metadata': ("", ujson.dumps(metadata)),
                 'content': (f'image.{imghdr.what(io.BytesIO(), h=content[:128])}', io.BytesIO(content))
             }
         )

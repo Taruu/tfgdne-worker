@@ -15,7 +15,7 @@ from loguru import logger
 from workers.wdv3_jax_worker import ImageTaggerWorker
 
 
-class SDImage:
+class AIImage:
     def __init__(self, seed: int, info_text: str, image_bytes: bytes, model_name: str, ratings: dict,
                  general_tags: dict):
         self.seed = seed
@@ -33,22 +33,31 @@ class SDImage:
 
 class ComfyApiWorker:
     def __init__(self):
-        self.comfy_worker = Comfy(settings["comfy_point"], settings["token"])
+        self.comfy_worker = Comfy(settings["comfy_point"]["url"], settings["comfy_point"]["token"])
         self.current_model_info = {}
+        self.current_model_count = 0
         self.checkpoint_list = []
+        self.current_status = {}
 
-        for model in settings.get("models"):
+        for model in settings["models"]["list"]:
             if not "comfy_workflow" in model:
                 continue
+            print(model)
+            model = dict(model)
             comfy_workflow = self._read_workflow(model["name"])
-            model_with_workflow = model
-            model_with_workflow["comfy_workflow"] = comfy_workflow
-            self.checkpoint_list.append(model_with_workflow)
 
+            model.update({"comfy_workflow": comfy_workflow, "tags_type": TagSource(model.get("tags_type"))})
+            self.checkpoint_list.append(model)
+        print(self.checkpoint_list)
         if not len(self.checkpoint_list):
             raise Exception("No any config for comfy workflow")
 
         self.current_model_info = random.choice(self.checkpoint_list)
+        print("current model", self.current_model_info)
+
+        self.image_tagger = ImageTaggerWorker()
+
+        logger.info(f'connect to server {settings["comfy_point.url"]}')
 
     def _read_workflow(self, name):
         with open(f"{settings['comfy_api_config']['workflow_folder']}/{name}.json") as file:
@@ -66,15 +75,17 @@ class ComfyApiWorker:
                 if "seed" in value["inputs"]:
                     local_workflow[key]["inputs"]["seed"] = seed
                 if "sampler_name" in value["inputs"]:
-                    local_workflow[key]["inputs"]["sampler_name"] = random.choice(settings["models_samplers"].keys()),
+                    local_workflow[key]["inputs"]["sampler_name"] = random.choice(
+                        list(settings["models_samplers"].keys()))
                 if "scheduler" in value["inputs"]:
-                    local_workflow[key]["inputs"]["scheduler"] = random.choice(settings["models_shedulers"].keys()),
+                    local_workflow[key]["inputs"]["scheduler"] = random.choice(
+                        list(settings["models_shedulers"].keys()))
                 if "positive" in value["inputs"]:
                     positive_block_id = local_workflow[key]["inputs"]["positive"][0]
                 if "negative" in value["inputs"]:
                     negative_block_id = local_workflow[key]["inputs"]["negative"][0]
                 if ("width" in value["inputs"]) and ("height" in value["inputs"]):
-                    width, height = random.choice(["models"]["sizes_list"]).split("x")
+                    width, height = random.choice(settings["models"]["sizes_list"]).split("x")
                     local_workflow[key]["inputs"]["width"] = int(width)
                     local_workflow[key]["inputs"]["height"] = int(height)
 
@@ -87,30 +98,47 @@ class ComfyApiWorker:
         return local_workflow
 
     def change_checkpoint(self):
+        if self.current_model_count > 0:
+            return
         self.current_model_info = random.choice(self.checkpoint_list)
+        self.current_model_count = settings["models.images_per_model"]
 
     def get_progress(self):
-
+        return self.current_status
         pass
 
     def generate_image(self, prompt: str, negative_prompt: str, artist_prompt: str) -> list[
-        SDImage]:
+        AIImage]:
         # I think is bad logic? When random inside
-        static_positive_tags = settings[f"static_positive_tags.{self.current_model_info.tags_type}"]
-        static_negative_tags = settings[f"static_negative_tags.{self.current_model_info.tags_type}"]
+        static_positive_tags = settings[f"static_positive_tags.{self.current_model_info.get('tags_type').value}"]
+        static_negative_tags = settings[f"static_negative_tags.{self.current_model_info.get('tags_type').value}"]
 
-        current_workflow = self._read_workflow(self.current_model_info.name)
+        current_workflow = self._read_workflow(self.current_model_info.get("name"))
+
         generate_workflow = self._fill_workflow(current_workflow, f"{prompt},{artist_prompt},{static_positive_tags}",
-                                                f"{static_negative_tags},{negative_prompt}")
-        current_status = self.comfy_worker.get_queue()
+                                                f"{static_negative_tags},{negative_prompt}", random.randint(1,4294967294))
+        self.current_status = self.comfy_worker.get_queue()
 
-        while (len(current_status['queue_running']) > 0) or (len(current_status['queue_pending']) > 0):
-            current_status = self.comfy_worker.get_queue()
+        print(generate_workflow)
+
+        while (len(self.current_status['queue_running']) > 0) or (len(self.current_status['queue_pending']) > 0):
+            self.current_status = self.comfy_worker.get_queue()
             logger.info(f'Comfy used now. Go to sleep')
             time.sleep(settings["comfy_api_config.time_to_sleep_if_has_usage"])
 
         queue_result = self.comfy_worker.queue_workflow(generate_workflow)
         prompt_id = queue_result.get("prompt_id")
+        images = self.comfy_worker.get_images_from_prompt(prompt_id)
+        if len(images) > 1:
+            raise Exception(f"Fix comfy workflow {self.current_model_info.name} to many image output")
+        images = [image[0] for image in images.values()]
+        image_bytes = images[0]
+        _, _, ratings, _, general_tags = self.image_tagger.get_image_marks(io.BytesIO(image_bytes))
+
+        image = AIImage(0, "", image_bytes, self.current_model_info.get("name"), ratings, general_tags)
+        self.current_model_count -= 1
+
+        return [image]
 
 
 class A1111ApiWorker:
@@ -152,7 +180,7 @@ class A1111ApiWorker:
         return result
 
     def generate_image(self, prompt: str, negative_prompt: str, artist_prompt: str, count_to_generate=1) -> list[
-        SDImage]:
+        AIImage]:
         self.change_checkpoint()
 
         # TODO style promt random select
@@ -204,7 +232,7 @@ class A1111ApiWorker:
 
         for seed, image_info, image_bytes in zip(info["all_seeds"], info["infotexts"], images):
             _, _, ratings, _, general_tags = self.image_tagger.get_image_marks(io.BytesIO(image_bytes))
-            result_images.append(SDImage(seed, image_info, image_bytes, self.current_model_name, ratings, general_tags))
+            result_images.append(AIImage(seed, image_info, image_bytes, self.current_model_name, ratings, general_tags))
             self.current_model_count -= 1
 
         return result_images
