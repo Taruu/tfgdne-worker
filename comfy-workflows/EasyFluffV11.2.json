@@ -3,7 +3,7 @@
     "inputs": {
       "seed": 996673324110987,
       "steps": 15,
-      "cfg": 4,
+      "cfg": 5,
       "sampler_name": "dpmpp_2s_ancestral",
       "scheduler": "karras",
       "denoise": 1,
@@ -124,8 +124,8 @@
   "39": {
     "inputs": {
       "seed": 996673324110987,
-      "steps": 15,
-      "cfg": 4,
+      "steps": 20,
+      "cfg": 5,
       "sampler_name": "dpmpp_2s_ancestral",
       "scheduler": "karras",
       "denoise": 0.7000000000000001,
@@ -173,6 +173,15 @@
     "class_type": "CheckpointLoader",
     "_meta": {
       "title": "Load Checkpoint With Config (DEPRECATED)"
+    }
+  },
+  "55": {
+    "inputs": {
+      "multiplier": 0.7
+    },
+    "class_type": "RescaleCFG",
+    "_meta": {
+      "title": "RescaleCFG"
     }
   }
 }
