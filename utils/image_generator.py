@@ -109,11 +109,12 @@ class ComfyApiWorker:
 
     def generate_image(self, prompt: str, negative_prompt: str, artist_prompt: str) -> list[
         AIImage]:
-        # I think is bad logic? When random inside
+
+        self.change_checkpoint()
         static_positive_tags = settings[f"static_positive_tags.{self.current_model_info.get('tags_type').value}"]
-        print(static_positive_tags)
+
         static_negative_tags = settings[f"static_negative_tags.{self.current_model_info.get('tags_type').value}"]
-        print(static_negative_tags)
+
         current_workflow = self._read_workflow(self.current_model_info.get("name"))
 
         generate_workflow = self._fill_workflow(current_workflow, f"{prompt},{artist_prompt},{static_positive_tags}",

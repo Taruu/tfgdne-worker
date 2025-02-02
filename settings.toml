@@ -3,6 +3,9 @@ list = [
     { name = "EasyFluffV11.2", tags_type = "e621", comfy_workflow = "EasyFluffV11.2" },
     { name = "indigoFurryMix_se02Vpred", tags_type = "e621", comfy_workflow = "indigoFurryMix_se02Vpred" },
     { name = "ponyDiffusionV6XL_v6StartWithThisOne", tags_type = "pony", comfy_workflow = "ponyDiffusionV6XL_v6StartWithThisOne" },
+    { name = "illustriousXLV01.C4Ut", tags_type = "danbooru", comfy_workflow ="illustriousXLV01.C4Ut"},
+    { name = "noobaiXlVpredV10.0zE1", tags_type = "danbooru", comfy_workflow = "noobaiXlVpredV10.0zE1"},
+    {name = "awpainting_v12", tags_type = "danbooru", comfy_workflow = "awpainting_v12"}
 ]
 sizes_list = ["1024x512", "786x786", "786x1024", "512x1024", "512x786"]
 steps = 25
@@ -30,8 +33,8 @@ euler_ancestral_cfg_pp = "Euler a"
 #dpmpp_2m_cfg_pp = "DPM++ 2M"
 #dpmpp_2m_sde = "DPM++ 2M SDE"
 #dpmpp_2m_sde_gpu = "DPM++ 2M SDE"
-dpmpp_3m_sde = "DPM++ 3M SDE"
-dpmpp_3m_sde_gpu = "DPM++ 3M SDE"
+#dpmpp_3m_sde = "DPM++ 3M SDE"
+#dpmpp_3m_sde_gpu = "DPM++ 3M SDE"
 #ddpm = ""
 #lcm = "LCM"
 #ipndm = ""
@@ -40,8 +43,8 @@ dpmpp_3m_sde_gpu = "DPM++ 3M SDE"
 #res_multistep = ""
 #res_multistep_cfg_pp = ""
 #ddim = "DDIM"
-uni_pc = "UniPC"
-uni_pc_bh2 = "UniPC"
+#uni_pc = "UniPC"
+#uni_pc_bh2 = "UniPC"
 
 [models_shedulers]
 #left ComfyUI right alias A1111
@@ -81,7 +84,7 @@ all = ""
 [static_negative_tags]
 e621 = "(low res, compression artifacts, low quality, invalid tag:1.2), (knot, bulge, gynomorph,  intersex:1.5), (nude, sex, penis, pussy, nipples, erection, cum, nsfw:1.5), 6 fingers, 7 fingers, 4 fingers, 3 fingers, 2 fingers, 1 finger, (fur), (text, comic, webcomic, signature), (3d \\(artwork\\):1.4)"
 danbooru = "nude, sex, nipples, erection, cum, ejaculation, pussy, penis"
-pony = "nude, sex, nipples, erection, cum, ejaculation, pussy, penisб (low res, compression artifacts, low quality, invalid tag:1.2), (knot, bulge, gynomorph,  intersex:1.5), (nude, sex, penis, pussy, nipples, erection, cum, nsfw:1.5), 6 fingers, 7 fingers, 4 fingers, 3 fingers, 2 fingers, 1 finger, (fur), (text, comic, webcomic, signature), (3d \\(artwork\\):1.4)"
+pony = "fur, furry, anthro, nude, sex, nipples, erection, cum, ejaculation, pussy, penisб (low res, compression artifacts, low quality, invalid tag:1.2), (knot, bulge, gynomorph,  intersex:1.5), (nude, sex, penis, pussy, nipples, erection, cum, nsfw:1.5), 6 fingers, 7 fingers, 4 fingers, 3 fingers, 2 fingers, 1 finger, (fur), (text, comic, webcomic, signature), (3d \\(artwork\\):1.4)"
 all = ""
 
 [comfy_api_config]
