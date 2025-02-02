@@ -1,15 +1,18 @@
 import time
 
+from numpy.ma.core import negative
+
 from config import settings
 from utils.image_generator import A1111ApiWorker, ComfyApiWorker
 from utils.post_image import SzurubooruPoster
 from utils.prompt_generator import PromptGen
-from workers.random_utils import TagSource, RandomTags
+from workers.random_utils import TagSource, RandomTags, RandomStyle
 
 prompt_gen_danbooru = PromptGen(TagSource.danbooru)
 prompt_gen_e621 = PromptGen(TagSource.e621)
 image_gen = ComfyApiWorker()
 imageboard_poster = SzurubooruPoster()
+random_style = RandomStyle(settings["styles.folder"])
 
 tags_generators = {
     TagSource.danbooru: {
@@ -27,10 +30,8 @@ tags_generators = {
 }
 
 while True:
-    print(tags_generators)
     # Look into config [models][list]
     current_type = image_gen.current_model_info.get("tags_type")
-    print(current_type)
 
     tags = tags_generators[current_type]['general'].get_random_tags(settings["tags.quantity_random_tags"])
 
@@ -43,9 +44,14 @@ while True:
         artist_tags = [f"by {tag.name}" for tag in artist_tags]
 
     tags = [tag.name for tag in tags]
+    pos_style, neg_style = random_style.get_random_style(current_type)
 
-    prompt = f"{', '.join(tags)}"
+    pos_style.extend(tags)
+
+    prompt = f"{', '.join(pos_style)}"
     artist_prompt = f"{', '.join(artist_tags)}"
+    negative_prompt = f"{', '.join(neg_style)}"
+
     # TODO negative promt generator
     images = image_gen.generate_image(prompt, "", artist_prompt)
     for image in images:

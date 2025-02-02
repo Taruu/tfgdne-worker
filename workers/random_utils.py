@@ -1,3 +1,4 @@
+import json
 import pathlib
 import random
 from time import time
@@ -140,15 +141,42 @@ class RandomTags:
 
 
 class RandomStyle:
-    pass
+    def __init__(self, path: Union[str, pathlib.Path]):
+        if type(path) is str:
+            self.path = pathlib.Path(path)
+        else:
+            self.path = path
+
+        self.styled_files = {}
+
+        for tag_type in TagSource:
+            self.styled_files.update({tag_type: [""]})
+
+        for file_path in self.path.iterdir():
+            for tag_type in TagSource:
+                if tag_type.value in file_path.name:
+                    self.styled_files[tag_type].append(str(file_path))
+
+    def get_random_style(self, tags_type: TagSource) -> [list[str], list[str]]:
+        styles = self.styled_files.get(tags_type)
+        style_file = random.choice(styles)
+        if not style_file:
+            return [""], [""]
+
+        with open(style_file, "r") as file_to_read:
+            json_style = json.load(file_to_read)
+
+        return json_style.get("positive_tags").split(','), json_style.get("negative_tags").split(",")
 
 
 if __name__ == "__main__":
     rt1 = RandomTags("../tags_files/tags-21-05-2024.e621.csv")
     rt2 = RandomTags("../tags_files/tags-13-07-2024.danbooru.csv")
     start = time()
-    g1 = rt1.get_random_general()
-    g2 = rt2.get_random_general()
-    print("e621", len(g1), g1)
-    print("dan", len(g2), g2)
+    g1 = rt1.get_random_tag()
+    g2 = rt2.get_random_tag()
+    print("e621", g1)
+    print("dan", g2)
     print(time() - start)
+    rt3 = RandomStyle("../styles")
+    print(rt3.get_random_style(TagSource.e621))

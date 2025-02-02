@@ -59,6 +59,8 @@ exponential = "Exponential"
 #kl_optimal = "KL Optimal"
 
 
+[styles]
+folder = "styles"
 
 [tags_files]
 danbooru_file = "tags_files/tags-13-07-2024.danbooru.csv"
