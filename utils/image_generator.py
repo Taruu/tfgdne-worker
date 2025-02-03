@@ -55,7 +55,7 @@ class ComfyApiWorker:
 
         self.image_tagger = ImageTaggerWorker()
         logger.info(f'connect to server {settings["comfy_point.url"]}')
-        logger.info(f"use model {self.current_model_info}")
+        logger.info(f"use model {self.current_model_info.get('name')}")
 
     def _read_workflow(self, name):
         with open(f"{settings['comfy_api_config']['workflow_folder']}/{name}.json") as file:
@@ -100,7 +100,7 @@ class ComfyApiWorker:
             return
         self.current_model_info = random.choice(self.checkpoint_list)
         self.current_model_count = settings["models.images_per_model"]
-        logger.info(f"use model {self.current_model_info}")
+        logger.info(f"use model {self.current_model_info.get('name')}")
 
     def get_progress(self):
         return self.current_status
@@ -166,9 +166,9 @@ class A1111ApiWorker:
         model_name, model_type = random.choice(self.checkpoint_list)
 
         self.stable_diffusion_worker.set_checkpoint(model_name)
-        self.current_model_name = model_name
         self.current_model_type = model_type
         self.current_model_count = settings["models.images_per_model"]
+
         logger.info(f'change model to {model_name}, type {model_type}')
 
     def get_queue_count(self) -> int:
