@@ -46,10 +46,13 @@ while True:
     tags = [tag.name for tag in tags]
     pos_style, neg_style = random_style.get_random_style(current_type)
 
-    pos_style.extend(tags)
+    if pos_style[0] == "":
+        artist_prompt = f"{', '.join(artist_tags)}"
+    else:
+        artist_prompt = ""
 
+    pos_style.extend(tags)
     prompt = f"{', '.join(pos_style)}"
-    artist_prompt = f"{', '.join(artist_tags)}"
     negative_prompt = f"{', '.join(neg_style)}"
 
     # TODO negative promt generator
