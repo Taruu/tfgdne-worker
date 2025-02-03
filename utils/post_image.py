@@ -30,7 +30,6 @@ class SzurubooruPoster:
                 post_id = post.get('id')
                 version = post.get('version')
                 result = self.szurubooru_api.delete_post(post_id, version=version)
-                print(result)
                 posts_to_remove_count -= 1
 
     def post_image(self, ai_image: AIImage):
@@ -47,10 +46,12 @@ class SzurubooruPoster:
 
         if not post:
             return None
-        logger.info(f"post image id {new_post_id}")
+        logger.info(f"post image id {new_post_id} with tags {post_tags}, and safety {safety}")
 
         if len(ai_image.info_text):
             self.szurubooru_api.comment(ai_image.info_text, new_post_id)
+        else:
+            self.szurubooru_api.comment("Look in source file to get all metadata about generated image", new_post_id)
 
         if self._get_total_posts_count() > self.max_images:
             self._remove_posts_out_limits()

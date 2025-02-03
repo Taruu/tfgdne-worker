@@ -42,22 +42,20 @@ class ComfyApiWorker:
         for model in settings["models"]["list"]:
             if not "comfy_workflow" in model:
                 continue
-            print(model)
             model = dict(model)
             comfy_workflow = self._read_workflow(model["name"])
 
             model.update({"comfy_workflow": comfy_workflow, "tags_type": TagSource(model.get("tags_type"))})
             self.checkpoint_list.append(model)
-        print(self.checkpoint_list)
+
         if not len(self.checkpoint_list):
             raise Exception("No any config for comfy workflow")
 
         self.current_model_info = random.choice(self.checkpoint_list)
-        print("current model", self.current_model_info)
 
         self.image_tagger = ImageTaggerWorker()
-
         logger.info(f'connect to server {settings["comfy_point.url"]}')
+        logger.info(f"use model {self.current_model_info}")
 
     def _read_workflow(self, name):
         with open(f"{settings['comfy_api_config']['workflow_folder']}/{name}.json") as file:
@@ -94,7 +92,7 @@ class ComfyApiWorker:
 
         local_workflow[positive_block_id]["inputs"]["text"] += positive_prompt
         local_workflow[negative_block_id]["inputs"]["text"] += negative_prompt
-        print("TODO WORKFLOW", local_workflow)
+
         return local_workflow
 
     def change_checkpoint(self):
@@ -102,6 +100,7 @@ class ComfyApiWorker:
             return
         self.current_model_info = random.choice(self.checkpoint_list)
         self.current_model_count = settings["models.images_per_model"]
+        logger.info(f"use model {self.current_model_info}")
 
     def get_progress(self):
         return self.current_status
@@ -109,7 +108,7 @@ class ComfyApiWorker:
 
     def generate_image(self, prompt: str, negative_prompt: str, artist_prompt: str) -> list[
         AIImage]:
-
+        logger.info("Generate image by comfy api")
         self.change_checkpoint()
         static_positive_tags = settings[f"static_positive_tags.{self.current_model_info.get('tags_type').value}"]
 
@@ -118,10 +117,9 @@ class ComfyApiWorker:
         current_workflow = self._read_workflow(self.current_model_info.get("name"))
 
         generate_workflow = self._fill_workflow(current_workflow, f"{prompt},{artist_prompt},{static_positive_tags}",
-                                                f"{static_negative_tags},{negative_prompt}", random.randint(1,4294967294))
+                                                f"{static_negative_tags},{negative_prompt}",
+                                                random.randint(1, 4294967294))
         self.current_status = self.comfy_worker.get_queue()
-
-        print(generate_workflow)
 
         while (len(self.current_status['queue_running']) > 0) or (len(self.current_status['queue_pending']) > 0):
             self.current_status = self.comfy_worker.get_queue()
@@ -183,6 +181,7 @@ class A1111ApiWorker:
 
     def generate_image(self, prompt: str, negative_prompt: str, artist_prompt: str, count_to_generate=1) -> list[
         AIImage]:
+        logger.info("Generate image by A1111 api")
         self.change_checkpoint()
 
         # TODO style promt random select

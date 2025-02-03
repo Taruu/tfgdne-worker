@@ -28,7 +28,6 @@ class Comfy:
         self.current_status = None
 
         ws_token = f"&token={self.token}" if self.token else ""
-        print(f"ws://{self.endpoint_url_parsed.netloc}/ws?clientId={self.client_id}{ws_token}")
         self.websocket.connect(f"ws://{self.endpoint_url_parsed.netloc}/ws?clientId={self.client_id}{ws_token}")
 
         self._image_timeout = 60 * 10
