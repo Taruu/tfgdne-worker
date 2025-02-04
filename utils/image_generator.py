@@ -116,7 +116,7 @@ class ComfyApiWorker:
 
         current_workflow = self._read_workflow(self.current_model_info.get("name"))
 
-        generate_workflow = self._fill_workflow(current_workflow, f"{prompt},{artist_prompt},{static_positive_tags}",
+        generate_workflow = self._fill_workflow(current_workflow, f"{static_positive_tags},{prompt},{artist_prompt}",
                                                 f"{static_negative_tags},{negative_prompt}",
                                                 random.randint(1, 4294967294))
         self.current_status = self.comfy_worker.get_queue()
