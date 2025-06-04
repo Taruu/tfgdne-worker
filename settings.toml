@@ -1,11 +1,12 @@
 [models]
 list = [
     { name = "EasyFluffV11.2", tags_type = "e621", comfy_workflow = "EasyFluffV11.2" },
-    { name = "indigoFurryMix_se02Vpred", tags_type = "e621", comfy_workflow = "indigoFurryMix_se02Vpred" },
-    { name = "ponyDiffusionV6XL_v6StartWithThisOne", tags_type = "pony", comfy_workflow = "ponyDiffusionV6XL_v6StartWithThisOne" },
-    { name = "illustriousXLV01.C4Ut", tags_type = "danbooru", comfy_workflow ="illustriousXLV01.C4Ut"},
-    { name = "noobaiXlVpredV10.0zE1", tags_type = "danbooru", comfy_workflow = "noobaiXlVpredV10.0zE1"},
-    {name = "awpainting_v12", tags_type = "danbooru", comfy_workflow = "awpainting_v12"}
+
+#    { name = "indigoFurryMix_se02Vpred", tags_type = "e621", comfy_workflow = "indigoFurryMix_se02Vpred" },
+#    { name = "ponyDiffusionV6XL_v6StartWithThisOne", tags_type = "pony", comfy_workflow = "ponyDiffusionV6XL_v6StartWithThisOne" },
+#    { name = "illustriousXLV01.C4Ut", tags_type = "danbooru", comfy_workflow ="illustriousXLV01.C4Ut"},
+#    { name = "noobaiXlVpredV10.0zE1", tags_type = "danbooru", comfy_workflow = "noobaiXlVpredV10.0zE1"},
+#    {name = "awpainting_v12", tags_type = "danbooru", comfy_workflow = "awpainting_v12"}
 ]
 sizes_list = ["1024x512", "786x786", "786x1024", "512x1024", "512x786"]
 steps = 25
@@ -106,5 +107,5 @@ file_ext = "jpg"
 time_to_sleep_if_has_usage = 1800
 
 [imagebouard_config]
-max_images = 90000 #if you set less then set before all older images has beed removed
+max_images = 10000 #if you set less then set before all older images has beed removed
 
