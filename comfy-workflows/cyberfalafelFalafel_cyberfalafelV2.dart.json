@@ -1,0 +1,374 @@
+{
+  "1": {
+    "inputs": {
+      "ckpt_name": "cyberfalafelFalafel_cyberfalafelV2.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Load Checkpoint"
+    }
+  },
+  "2": {
+    "inputs": {
+      "model_name": "RealESRGAN_x4plus_anime_6B.pth"
+    },
+    "class_type": "UpscaleModelLoader",
+    "_meta": {
+      "title": "Load Upscale Model"
+    }
+  },
+  "3": {
+    "inputs": {
+      "object_to_patch": "diffusion_model",
+      "residual_diff_threshold": 0.10000000000000002,
+      "start": 0,
+      "end": 1,
+      "max_consecutive_cache_hits": -1,
+      "model": [
+        "1",
+        0
+      ]
+    },
+    "class_type": "ApplyFBCacheOnModel",
+    "_meta": {
+      "title": "Apply First Block Cache"
+    }
+  },
+  "5": {
+    "inputs": {
+      "text": "pixel_(artwork), pixel_(artwork), censored, \nbad hand,  underwear, pubes, bad face, sketch, \n(3d_(artwork), 3d:1.2), zp92, low_res, big_breasts, (vore:1.2), low_res, compression_artifacts, low-res, low_res, \nrealistic, realistic face, (monochrome:1.5), \n6_fingers, 7_fingers, 3_fingers, 2_fingers, ",
+      "parser": "A1111",
+      "mean_normalization": false,
+      "multi_conditioning": true,
+      "use_old_emphasis_implementation": false,
+      "with_SDXL": false,
+      "ascore": 6.000000000000001,
+      "width": 1024,
+      "height": 1024,
+      "crop_w": 0,
+      "crop_h": 0,
+      "target_width": 1024,
+      "target_height": 1024,
+      "text_g": "",
+      "text_l": "",
+      "smZ_steps": 1,
+      "clip": [
+        "37",
+        0
+      ]
+    },
+    "class_type": "smZ CLIPTextEncode",
+    "_meta": {
+      "title": "negative_input"
+    }
+  },
+  "9": {
+    "inputs": {
+      "seed": 495627393284313,
+      "steps": 15,
+      "cfg": 5,
+      "sampler_name": "euler",
+      "scheduler": "normal",
+      "denoise": 1,
+      "model": [
+        "3",
+        0
+      ],
+      "positive": [
+        "79",
+        0
+      ],
+      "negative": [
+        "5",
+        0
+      ],
+      "latent_image": [
+        "81",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "10": {
+    "inputs": {
+      "width": 784,
+      "height": 1024,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "Empty Latent Image"
+    }
+  },
+  "13": {
+    "inputs": {
+      "samples": [
+        "9",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "18": {
+    "inputs": {
+      "seed": 222901210326467,
+      "steps": 25,
+      "cfg": 6,
+      "sampler_name": "euler_ancestral",
+      "scheduler": "normal",
+      "denoise": 0.3500000000000001,
+      "model": [
+        "3",
+        0
+      ],
+      "positive": [
+        "79",
+        0
+      ],
+      "negative": [
+        "5",
+        0
+      ],
+      "latent_image": [
+        "33",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "23": {
+    "inputs": {
+      "tile_size": 800,
+      "overlap": 128,
+      "temporal_size": 128,
+      "temporal_overlap": 8,
+      "samples": [
+        "18",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    },
+    "class_type": "VAEDecodeTiled",
+    "_meta": {
+      "title": "VAE Decode (Tiled)"
+    }
+  },
+  "33": {
+    "inputs": {
+      "tile_size": 832,
+      "overlap": 128,
+      "temporal_size": 128,
+      "temporal_overlap": 8,
+      "pixels": [
+        "35",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    },
+    "class_type": "VAEEncodeTiled",
+    "_meta": {
+      "title": "VAE Encode (Tiled)"
+    }
+  },
+  "35": {
+    "inputs": {
+      "resize_scale": 2.5,
+      "resize_method": "nearest",
+      "upscale_model": [
+        "2",
+        0
+      ],
+      "image": [
+        "13",
+        0
+      ]
+    },
+    "class_type": "UpscaleImageByModelThenResize",
+    "_meta": {
+      "title": "Upscale Image By Model Then Resize"
+    }
+  },
+  "37": {
+    "inputs": {
+      "stop_at_clip_layer": -2,
+      "clip": [
+        "1",
+        1
+      ]
+    },
+    "class_type": "CLIPSetLastLayer",
+    "_meta": {
+      "title": "CLIP Set Last Layer"
+    }
+  },
+  "68": {
+    "inputs": {
+      "model": "dart-v2-sft"
+    },
+    "class_type": "DanbooruTagsTransformerLoader",
+    "_meta": {
+      "title": "Dart Load"
+    }
+  },
+  "69": {
+    "inputs": {
+      "max_new_tokens": 128,
+      "min_new_tokens": 0,
+      "temperature": 1,
+      "top_p": 1,
+      "top_k": 100,
+      "num_beams": 1
+    },
+    "class_type": "DanbooruTagsTransformerGenerationConfig",
+    "_meta": {
+      "title": "Dart Generation Config"
+    }
+  },
+  "70": {
+    "inputs": {
+      "prompt": [
+        "72",
+        0
+      ],
+      "seed": 2921092769,
+      "animagine_order": false,
+      "ban_tags": "",
+      "remove_tags": "",
+      "model": [
+        "68",
+        0
+      ],
+      "tokenizer": [
+        "68",
+        1
+      ],
+      "setting": [
+        "69",
+        0
+      ]
+    },
+    "class_type": "DanbooruTagsTransformerGenerate",
+    "_meta": {
+      "title": "Dart Generate"
+    }
+  },
+  "71": {
+    "inputs": {
+      "text": ""
+    },
+    "class_type": "TextBoxMira",
+    "_meta": {
+      "title": "positive_input"
+    }
+  },
+  "72": {
+    "inputs": {
+      "copyright": "",
+      "character": "",
+      "rating": "sfw",
+      "aspect_ratio": "tall",
+      "length": "long",
+      "general": [
+        "76",
+        0
+      ],
+      "identity": "none"
+    },
+    "class_type": "DanbooruTagsTransformerComposePromptV2",
+    "_meta": {
+      "title": "Dart Compose Prompt V2"
+    }
+  },
+  "76": {
+    "inputs": {
+      "action": "replace",
+      "tidy_tags": "yes",
+      "text_a": [
+        "71",
+        0
+      ],
+      "text_b": "_",
+      "text_c": " "
+    },
+    "class_type": "StringFunction|pysssss",
+    "_meta": {
+      "title": "String Function 🐍"
+    }
+  },
+  "77": {
+    "inputs": {
+      "images": [
+        "23",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "79": {
+    "inputs": {
+      "text": [
+        "70",
+        0
+      ],
+      "parser": "A1111",
+      "mean_normalization": false,
+      "multi_conditioning": true,
+      "use_old_emphasis_implementation": false,
+      "with_SDXL": false,
+      "ascore": 6.000000000000001,
+      "width": 1024,
+      "height": 1024,
+      "crop_w": 0,
+      "crop_h": 0,
+      "target_width": 1024,
+      "target_height": 1024,
+      "text_g": "",
+      "text_l": "",
+      "smZ_steps": 1,
+      "clip": [
+        "37",
+        0
+      ]
+    },
+    "class_type": "smZ CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode++"
+    }
+  },
+  "81": {
+    "inputs": {
+      "folder_path": "temp",
+      "enabled": true,
+      "anything": [
+        "10",
+        0
+      ]
+    },
+    "class_type": "TempCleaner",
+    "_meta": {
+      "title": "TempCleaner"
+    }
+  }
+}
