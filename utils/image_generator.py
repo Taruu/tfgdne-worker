@@ -78,10 +78,18 @@ class ComfyApiWorker:
                 if "scheduler" in value["inputs"]:
                     local_workflow[key]["inputs"]["scheduler"] = random.choice(
                         list(settings["models_shedulers"].keys()))
-                if "positive" in value["inputs"]:
-                    positive_block_id = local_workflow[key]["inputs"]["positive"][0]
-                if "negative" in value["inputs"]:
-                    negative_block_id = local_workflow[key]["inputs"]["negative"][0]
+
+                #look at titlename to know is input or dummy item
+                if "positive_input" == value["inputs"]["_meta"]["title"]:
+                    positive_block_id = key
+                if "negative_input" == value["inputs"]["_meta"]["title"]:
+                    negative_block_id = key
+
+                # if "positive" in value["inputs"]:
+                #     positive_block_id = local_workflow[key]["inputs"]["positive"][0]
+                # if "negative" in value["inputs"]:
+                #     negative_block_id = local_workflow[key]["inputs"]["negative"][0]
+
                 if ("width" in value["inputs"]) and ("height" in value["inputs"]):
                     width, height = random.choice(settings["models"]["sizes_list"]).split("x")
                     local_workflow[key]["inputs"]["width"] = int(width)
@@ -119,6 +127,7 @@ class ComfyApiWorker:
         generate_workflow = self._fill_workflow(current_workflow, f"{static_positive_tags},{prompt},{artist_prompt}",
                                                 f"{static_negative_tags},{negative_prompt}",
                                                 random.randint(1, 4294967294))
+
         self.current_status = self.comfy_worker.get_queue()
 
         while (len(self.current_status['queue_running']) > 0) or (len(self.current_status['queue_pending']) > 0):

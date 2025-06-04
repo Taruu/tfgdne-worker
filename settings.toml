@@ -1,8 +1,8 @@
 [models]
 list = [
     { name = "EasyFluffV11.2", tags_type = "e621", comfy_workflow = "EasyFluffV11.2" },
-
-#    { name = "indigoFurryMix_se02Vpred", tags_type = "e621", comfy_workflow = "indigoFurryMix_se02Vpred" },
+    { name = "indigoFurryMix_se02Vpred", tags_type = "e621", comfy_workflow = "indigoFurryMix_se02Vpred" },
+    {name = ""}
 #    { name = "ponyDiffusionV6XL_v6StartWithThisOne", tags_type = "pony", comfy_workflow = "ponyDiffusionV6XL_v6StartWithThisOne" },
 #    { name = "illustriousXLV01.C4Ut", tags_type = "danbooru", comfy_workflow ="illustriousXLV01.C4Ut"},
 #    { name = "noobaiXlVpredV10.0zE1", tags_type = "danbooru", comfy_workflow = "noobaiXlVpredV10.0zE1"},
