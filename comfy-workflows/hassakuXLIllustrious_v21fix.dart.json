@@ -34,43 +34,9 @@
       "title": "Apply First Block Cache"
     }
   },
-  "4": {
-    "inputs": {
-      "text": [
-        "70",
-        0
-      ],
-      "parser": "A1111",
-      "mean_normalization": false,
-      "multi_conditioning": true,
-      "use_old_emphasis_implementation": false,
-      "with_SDXL": false,
-      "ascore": 6.000000000000001,
-      "width": 1024,
-      "height": 1024,
-      "crop_w": 0,
-      "crop_h": 0,
-      "target_width": 1024,
-      "target_height": 1024,
-      "text_g": [
-        "70",
-        0
-      ],
-      "text_l": "",
-      "smZ_steps": 1,
-      "clip": [
-        "37",
-        0
-      ]
-    },
-    "class_type": "smZ CLIPTextEncode",
-    "_meta": {
-      "title": "CLIP Text Encode++"
-    }
-  },
   "5": {
     "inputs": {
-      "text": "pixel_(artwork), pixel_(artwork), censored, \nbad hand, butt, small_ears, underwear, pubes, bad face, sketch, censor_bar,\n(3d_(artwork), 3d:1.2), zp92, low_res, big_breasts,  (vore:1.2), low_res, compression_artifacts, low-res, low_res, \nrealistic, realistic face, (monochrome:1.5), \n6_fingers, 7_fingers, 3_fingers, 2_fingers, ",
+      "text": "pixel_(artwork), pixel_(artwork), censored, \nbad hand,  underwear, pubes, bad face, sketch, \n(3d_(artwork), 3d:1.2), zp92, low_res, big_breasts, (vore:1.2), low_res, compression_artifacts, low-res, low_res, \nrealistic, realistic face, (monochrome:1.5), \n6_fingers, 7_fingers, 3_fingers, 2_fingers, ",
       "parser": "A1111",
       "mean_normalization": false,
       "multi_conditioning": true,
@@ -98,7 +64,7 @@
   },
   "9": {
     "inputs": {
-      "seed": 215193376997785,
+      "seed": 495627393284313,
       "steps": 15,
       "cfg": 5,
       "sampler_name": "euler",
@@ -109,7 +75,7 @@
         0
       ],
       "positive": [
-        "4",
+        "79",
         0
       ],
       "negative": [
@@ -155,7 +121,7 @@
   },
   "18": {
     "inputs": {
-      "seed": 215193376997785,
+      "seed": 222901210326467,
       "steps": 25,
       "cfg": 6,
       "sampler_name": "euler_ancestral",
@@ -163,6 +129,10 @@
       "denoise": 0.3500000000000001,
       "model": [
         "3",
+        0
+      ],
+      "positive": [
+        "79",
         0
       ],
       "negative": [
@@ -279,7 +249,7 @@
         "72",
         0
       ],
-      "seed": 2442394873,
+      "seed": 2921092769,
       "animagine_order": false,
       "ban_tags": "",
       "remove_tags": "",
@@ -303,7 +273,7 @@
   },
   "71": {
     "inputs": {
-      "text": "full-length_portrait,hi_res,detailed,\n(ojipon:0.7),(horokusa0519:0.6), (seraziel:0.6), (personal_ami:0.8), \nwhite_background, \nBREAK,\nfemale, solo_focus, solo, standing, \ntanya degurechaff, youjo senki,    \nclothing, standing,\n(furry:1.3),fur, anthro, fluffy,\nsmug_face, evil_grin, \n(multicolored_body:1.55), multicolored_face, \n(brown_ears, brown_tail, brown_fur, brown_body:1.55),  \ndog_girl, (dog_ears:1.2), brown_tail, brown_ears, \n(white_face:0.6), (floppy_ears:1.25), \ntail, dog_tail, big_tail, wolf_tail, wolf_ears, \nsmile, looking_at_viewer, \nmessy_tail, messy_hair, \nmedium_breasts, breasts, \nmilitary_uniform, pants, green_uniform, \n(hindpaw, digitigrade_legs:1.2),\nholding_weapon, holding_rifle, \naction_pose, "
+      "text": ""
     },
     "class_type": "TextBoxMira",
     "_meta": {
@@ -337,7 +307,8 @@
         0
       ],
       "text_b": "_",
-      "text_c": " "
+      "text_c": " ",
+      "result": "full-length portrait,hi res,detailed,\n(ojipon:0.7),(horokusa0519:0.6), (seraziel:0.6), (personal ami:0.8), white background, BREAK,\nfemale, solo focus, solo, standing, tanya degurechaff, youjo senki, clothing, standing,\n(furry:1.3),fur, anthro, fluffy,\nsmug face, evil grin, (multicolored body:1.55), multicolored face, (brown ears, brown tail, brown fur, brown body:1.55), dog girl, (dog ears:1.2), brown tail, brown ears, (white face:0.6), (floppy ears:1.25), tail, dog tail, big tail, wolf tail, wolf ears, smile, looking at viewer, messy tail, messy hair, medium breasts, breasts, military uniform, pants, green uniform, (hindpaw, digitigrade legs:1.2),\nholding weapon, holding rifle, action pose,"
     },
     "class_type": "StringFunction|pysssss",
     "_meta": {
@@ -354,6 +325,37 @@
     "class_type": "PreviewImage",
     "_meta": {
       "title": "Preview Image"
+    }
+  },
+  "79": {
+    "inputs": {
+      "text": [
+        "70",
+        0
+      ],
+      "parser": "A1111",
+      "mean_normalization": false,
+      "multi_conditioning": true,
+      "use_old_emphasis_implementation": false,
+      "with_SDXL": false,
+      "ascore": 6,
+      "width": 1024,
+      "height": 1024,
+      "crop_w": 0,
+      "crop_h": 0,
+      "target_width": 1024,
+      "target_height": 1024,
+      "text_g": "",
+      "text_l": "",
+      "smZ_steps": 1,
+      "clip": [
+        "37",
+        0
+      ]
+    },
+    "class_type": "smZ CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode++"
     }
   }
 }
