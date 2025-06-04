@@ -79,10 +79,10 @@ class ComfyApiWorker:
                     local_workflow[key]["inputs"]["scheduler"] = random.choice(
                         list(settings["models_shedulers"].keys()))
 
-                #look at titlename to know is input or dummy item
-                if "positive_input" == value["inputs"]["_meta"]["title"]:
+                # look at titlename to know is input or dummy item
+                if "positive_input" == value["_meta"]["title"]:
                     positive_block_id = key
-                if "negative_input" == value["inputs"]["_meta"]["title"]:
+                if "negative_input" == value["_meta"]["title"]:
                     negative_block_id = key
 
                 # if "positive" in value["inputs"]:
