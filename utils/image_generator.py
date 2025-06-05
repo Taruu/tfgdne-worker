@@ -61,10 +61,24 @@ class ComfyApiWorker:
         with open(f"{settings['comfy_api_config']['workflow_folder']}/{name}.json") as file:
             return json.load(file)
 
-    def _fill_workflow(self, workflow: dict, positive_prompt: str, negative_prompt: str, seed: int):
+    def _fill_workflow(self, workflow: dict,
+                       seed=random.randint(1, 4294967294),
+                       static_positive_tags="", static_negative_tags="",
+                       artist_prompt="",
+                       prompt="", negative_prompt=""
+                       ):
         local_workflow = copy.deepcopy(workflow)
-        positive_block_id = None
-        negative_block_id = None
+
+        all_in_one_positive_block_id = None
+        all_in_one_negative_block_id = None
+
+        static_positive_tags_block_id = None
+        static_negative_tags_block_id = None
+
+        artist_prompt_block_id = None
+
+        prompt_block_id = None
+        negative_prompt_block_id = None
 
         for key, value in local_workflow.items():
             if "inputs" in value:
@@ -81,9 +95,22 @@ class ComfyApiWorker:
 
                 # look at titlename to know is input or dummy item
                 if "positive_input" == value["_meta"]["title"]:
-                    positive_block_id = key
+                    all_in_one_positive_block_id = key
                 if "negative_input" == value["_meta"]["title"]:
-                    negative_block_id = key
+                    all_in_one_negative_block_id = key
+
+                if "static_positive_tags" == value["_meta"]["title"]:
+                    static_positive_tags_block_id = key
+                if "static_negative_tags" == value["_meta"]["title"]:
+                    static_negative_tags_block_id = key
+
+                if "artist_prompt" == value["_meta"]["title"]:
+                    artist_prompt_block_id = key
+
+                if "prompt" == value["_meta"]["title"]:
+                    prompt_block_id = key
+                if "negative_prompt" == value["_meta"]["title"]:
+                    negative_prompt_block_id = key
 
                 # if "positive" in value["inputs"]:
                 #     positive_block_id = local_workflow[key]["inputs"]["positive"][0]
@@ -95,11 +122,30 @@ class ComfyApiWorker:
                     local_workflow[key]["inputs"]["width"] = int(width)
                     local_workflow[key]["inputs"]["height"] = int(height)
 
-        if not negative_block_id and not positive_block_id:
-            raise Exception(f"Where is text prompt?")
+        # if not negative_block_id and not all_positive_block_id:
+        #     raise Exception(f"Where is input for prompt??")
+        if all_in_one_positive_block_id:
+            local_workflow[all_in_one_positive_block_id]["inputs"]["text"] \
+                += f"{artist_prompt},{static_positive_tags},{prompt}"
+        if all_in_one_negative_block_id:
+            local_workflow[all_in_one_negative_block_id]["inputs"]["text"] \
+                += f"{static_negative_tags}, {negative_prompt}"
 
-        local_workflow[positive_block_id]["inputs"]["text"] += positive_prompt
-        local_workflow[negative_block_id]["inputs"]["text"] += negative_prompt
+        if static_positive_tags_block_id:
+            local_workflow[static_positive_tags_block_id]["inputs"]["text"] \
+                += static_positive_tags
+        if static_negative_tags_block_id:
+            local_workflow[static_negative_tags_block_id]["inputs"]["text"] \
+                += static_negative_tags
+
+        if artist_prompt_block_id:
+            local_workflow[artist_prompt_block_id]["inputs"]["text"] += artist_prompt
+
+        if prompt_block_id:
+            local_workflow[prompt_block_id]["inputs"]["text"] += prompt
+
+        if negative_prompt_block_id:
+            local_workflow[negative_prompt_block_id]["inputs"]["text"] += negative_prompt
 
         return local_workflow
 
@@ -124,9 +170,12 @@ class ComfyApiWorker:
 
         current_workflow = self._read_workflow(self.current_model_info.get("name"))
 
-        generate_workflow = self._fill_workflow(current_workflow, f"{static_positive_tags},{prompt},{artist_prompt}",
-                                                f"{static_negative_tags},{negative_prompt}",
-                                                random.randint(1, 4294967294))
+        generate_workflow = self._fill_workflow(current_workflow,
+                                                static_positive_tags=static_positive_tags,
+                                                static_negative_tags=static_negative_tags,
+                                                artist_prompt=artist_prompt,
+                                                prompt=prompt, negative_prompt=negative_prompt
+                                                )
 
         self.current_status = self.comfy_worker.get_queue()
 

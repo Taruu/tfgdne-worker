@@ -64,7 +64,7 @@
   },
   "9": {
     "inputs": {
-      "seed": 495627393284313,
+      "seed": 855099610679202,
       "steps": 15,
       "cfg": 5,
       "sampler_name": "euler",
@@ -121,7 +121,7 @@
   },
   "18": {
     "inputs": {
-      "seed": 222901210326467,
+      "seed": 235367468793980,
       "steps": 25,
       "cfg": 6,
       "sampler_name": "euler_ancestral",
@@ -249,7 +249,7 @@
         "72",
         0
       ],
-      "seed": 2921092769,
+      "seed": 59190869,
       "animagine_order": false,
       "ban_tags": "",
       "remove_tags": "",
@@ -307,7 +307,8 @@
         0
       ],
       "text_b": "_",
-      "text_c": " "
+      "text_c": " ",
+      "result": "test1"
     },
     "class_type": "StringFunction|pysssss",
     "_meta": {
@@ -329,7 +330,7 @@
   "79": {
     "inputs": {
       "text": [
-        "70",
+        "84",
         0
       ],
       "parser": "A1111",
@@ -337,7 +338,7 @@
       "multi_conditioning": true,
       "use_old_emphasis_implementation": false,
       "with_SDXL": false,
-      "ascore": 6,
+      "ascore": 6.000000000000001,
       "width": 1024,
       "height": 1024,
       "crop_w": 0,
@@ -369,6 +370,46 @@
     "class_type": "TempCleaner",
     "_meta": {
       "title": "TempCleaner"
+    }
+  },
+  "84": {
+    "inputs": {
+      "action": "append",
+      "tidy_tags": "yes",
+      "text_a": [
+        "70",
+        0
+      ],
+      "text_b": [
+        "86",
+        0
+      ],
+      "text_c": [
+        "85",
+        0
+      ]
+    },
+    "class_type": "StringFunction|pysssss",
+    "_meta": {
+      "title": "String Function 🐍"
+    }
+  },
+  "85": {
+    "inputs": {
+      "text": ""
+    },
+    "class_type": "TextBoxMira",
+    "_meta": {
+      "title": "artist_prompt"
+    }
+  },
+  "86": {
+    "inputs": {
+      "text": ""
+    },
+    "class_type": "TextBoxMira",
+    "_meta": {
+      "title": "static_positive_tags"
     }
   }
 }
