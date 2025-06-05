@@ -80,9 +80,9 @@ quantity_random_artists = 2
 style_folder = "tags_files/style"
 
 [static_positive_tags]
-e621 = "high quality, hi res, (fox, fennec, fox tail, fox ears, female), (animal humanoid:1.1), solo, standing,"
-danbooru = "high quality, highres, absurdres, (fox ears, fox tail, fox girl, animal ears, 1girl), solo"
-pony = "high quality, hi res, (fox, fennec, fox tail, fox ears, female:1.2), (animal humanoid:1.1), solo, standing,"
+e621 = "high quality, hi res, (fox, fennec, fox tail, fox ears, female:1.3), (animal humanoid:1.1), solo, standing,"
+danbooru = "high quality, highres, absurdres, (fox ears, fox tail, fox girl, animal ears, 1girl:1.4), solo"
+pony = "high quality, hi res, (fox, fennec, fox tail, fox ears, female:1.3), (animal humanoid:1.1), solo, standing,"
 all = "(nsfw:1.4)"
 
 [static_negative_tags]
