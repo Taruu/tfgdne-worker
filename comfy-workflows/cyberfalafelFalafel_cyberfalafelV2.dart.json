@@ -36,7 +36,7 @@
   },
   "5": {
     "inputs": {
-      "text": "pixel_(artwork), pixel_(artwork), censored, \nbad hand,  underwear, pubes, bad face, sketch, \n(3d_(artwork), 3d:1.2), zp92, low_res, big_breasts, (vore:1.2), low_res, compression_artifacts, low-res, low_res, \nrealistic, realistic face, (monochrome:1.5), \n6_fingers, 7_fingers, 3_fingers, 2_fingers, ",
+      "text": "pixel_(artwork), pixel_(artwork), censored, \nbad hand,  underwear, pubes, bad face, sketch, \n(3d_(artwork), 3d:1.2), zp92, low_res, big_breasts, (vore:1.2), low_res, compression_artifacts, low-res, low_res, \nrealistic, realistic face, (monochrome:1.5), \n6_fingers, 7_fingers, 3_fingers, 2_fingers, (nsfw:1.5),",
       "parser": "A1111",
       "mean_normalization": false,
       "multi_conditioning": true,
