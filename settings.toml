@@ -83,7 +83,7 @@ style_folder = "tags_files/style"
 e621 = "high quality, hi res, (fox, fennec, fox tail, fox ears, female), (animal humanoid:1.1), solo, standing,"
 danbooru = "high quality, highres, absurdres, (fox ears, fox tail, fox girl, animal ears, 1girl), solo"
 pony = "high quality, hi res, (fox, fennec, fox tail, fox ears, female:1.2), (animal humanoid:1.1), solo, standing,"
-all = ""
+all = "(nsfw:1.4)"
 
 [static_negative_tags]
 e621 = "(low res, compression artifacts, low quality, invalid tag:1.2), (knot, bulge, gynomorph,  intersex:1.5), (nude, sex, penis, pussy, nipples, erection, cum, nsfw:1.5), 6 fingers, 7 fingers, 4 fingers, 3 fingers, 2 fingers, 1 finger, (fur), (text, comic, webcomic, signature), (3d \\(artwork\\):1.4)"
