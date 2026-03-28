@@ -6,7 +6,7 @@ import io
 from filetype import filetype
 
 from config import settings
-import imghdr
+
 
 
 class SzurubooruApi:
