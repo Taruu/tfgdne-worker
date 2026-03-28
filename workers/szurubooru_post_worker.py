@@ -2,6 +2,9 @@ import base64
 import requests
 import ujson
 import io
+
+from filetype import filetype
+
 from config import settings
 import imghdr
 
@@ -35,7 +38,7 @@ class SzurubooruApi:
             'api/posts',
             files={
                 'metadata': ("", ujson.dumps(metadata)),
-                'content': (f'image.{imghdr.what(io.BytesIO(), h=content[:128])}', io.BytesIO(content))
+                'content': (f'image.{filetype.guess(io.BytesIO(), h=content[:128]).extension}', io.BytesIO(content))
             }
         )
 
