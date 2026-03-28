@@ -38,7 +38,7 @@ class SzurubooruApi:
             'api/posts',
             files={
                 'metadata': ("", ujson.dumps(metadata)),
-                'content': (f'image.{filetype.guess(io.BytesIO(), h=content[:128]).extension}', io.BytesIO(content))
+                'content': (f'image.{filetype.guess(io.BytesIO(content)).extension}', io.BytesIO(content))
             }
         )
 
