@@ -1,7 +1,7 @@
 {
   "3": {
     "inputs": {
-      "seed": 260533420904707,
+      "seed": 1099314020314720,
       "steps": 15,
       "cfg": 4,
       "sampler_name": "dpmpp_2s_ancestral",
@@ -42,7 +42,7 @@
   },
   "6": {
     "inputs": {
-      "text": "digital drawing \\(artwork\\), highres,",
+      "text": "digital media \\(artwork\\), digital drawing \\(artwork\\), highres,",
       "clip": [
         "20",
         0
@@ -55,7 +55,7 @@
   },
   "7": {
     "inputs": {
-      "text": "3d \\(artwork\\), 3d background, jpeg artifacts, ",
+      "text": "3d \\(artwork\\), 3d background, jpeg artifacts,2girls, sex, nsfw, porn, comics, multiple views,",
       "clip": [
         "20",
         0
@@ -84,7 +84,7 @@
   },
   "16": {
     "inputs": {
-      "ckpt_name": "noobaiXlVpredV10.0zE1.safetensors"
+      "ckpt_name": "illustriousXLV01.C4Ut.safetensors"
     },
     "class_type": "CheckpointLoaderSimple",
     "_meta": {
@@ -132,7 +132,7 @@
   },
   "39": {
     "inputs": {
-      "seed": 260533420904707,
+      "seed": 1099314020314720,
       "steps": 20,
       "cfg": 4,
       "sampler_name": "dpmpp_2s_ancestral",
