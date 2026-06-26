@@ -205,7 +205,7 @@ if __name__ == "__main__":
 
     # set the seed for our KSampler node
     prompt["3"]["inputs"]["seed"] = 5
-    with open("../comfy-workflows/EasyFluffV11.2.json") as file:
+    with open("../comfy-workflows/outdated/EasyFluffV11.2.json") as file:
         prompt = json.load(file)
 
     seed = random.random() * 10_0000
