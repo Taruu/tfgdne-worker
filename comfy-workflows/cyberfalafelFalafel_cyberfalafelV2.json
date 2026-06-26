@@ -8,7 +8,7 @@
       "scheduler": "karras",
       "denoise": 1,
       "model": [
-        "54",
+        "62",
         0
       ],
       "positive": [
@@ -76,7 +76,7 @@
         0
       ],
       "vae": [
-        "54",
+        "62",
         2
       ]
     },
@@ -89,7 +89,7 @@
     "inputs": {
       "stop_at_clip_layer": -2,
       "clip": [
-        "54",
+        "62",
         1
       ]
     },
@@ -119,7 +119,7 @@
       "scheduler": "karras",
       "denoise": 0.7,
       "model": [
-        "54",
+        "62",
         0
       ],
       "positive": [
@@ -152,16 +152,6 @@
     "class_type": "TempCleaner",
     "_meta": {
       "title": "TempCleaner"
-    }
-  },
-  "54": {
-    "inputs": {
-      "config_name": "indigoFurryMix_se02Vpred.yaml",
-      "ckpt_name": "indigoFurryMix_se02Vpred.safetensors"
-    },
-    "class_type": "CheckpointLoader",
-    "_meta": {
-      "title": "Load Checkpoint With Config (DEPRECATED)"
     }
   },
   "55": {
@@ -198,7 +188,7 @@
         0
       ],
       "vae": [
-        "54",
+        "62",
         2
       ]
     },
@@ -214,7 +204,7 @@
         0
       ],
       "vae": [
-        "54",
+        "62",
         2
       ]
     },
@@ -256,6 +246,15 @@
     "class_type": "PrimitiveStringMultiline",
     "_meta": {
       "title": "positive_input"
+    }
+  },
+  "62": {
+    "inputs": {
+      "ckpt_name": "cyberfalafelFalafel_cyberfalafelV2.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Load Checkpoint"
     }
   }
 }

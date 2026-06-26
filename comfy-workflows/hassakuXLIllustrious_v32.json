@@ -4,11 +4,11 @@
       "seed": 798989593,
       "steps": 15,
       "cfg": 4,
-      "sampler_name": "dpmpp_2s_ancestral",
-      "scheduler": "karras",
+      "sampler_name": "euler",
+      "scheduler": "normal",
       "denoise": 1,
       "model": [
-        "54",
+        "62",
         0
       ],
       "positive": [
@@ -76,7 +76,7 @@
         0
       ],
       "vae": [
-        "54",
+        "62",
         2
       ]
     },
@@ -89,7 +89,7 @@
     "inputs": {
       "stop_at_clip_layer": -2,
       "clip": [
-        "54",
+        "62",
         1
       ]
     },
@@ -115,11 +115,11 @@
       "seed": 798989593,
       "steps": 20,
       "cfg": 4,
-      "sampler_name": "dpmpp_2s_ancestral",
-      "scheduler": "karras",
+      "sampler_name": "euler",
+      "scheduler": "normal",
       "denoise": 0.7,
       "model": [
-        "54",
+        "62",
         0
       ],
       "positive": [
@@ -152,16 +152,6 @@
     "class_type": "TempCleaner",
     "_meta": {
       "title": "TempCleaner"
-    }
-  },
-  "54": {
-    "inputs": {
-      "config_name": "indigoFurryMix_se02Vpred.yaml",
-      "ckpt_name": "indigoFurryMix_se02Vpred.safetensors"
-    },
-    "class_type": "CheckpointLoader",
-    "_meta": {
-      "title": "Load Checkpoint With Config (DEPRECATED)"
     }
   },
   "55": {
@@ -198,7 +188,7 @@
         0
       ],
       "vae": [
-        "54",
+        "62",
         2
       ]
     },
@@ -214,7 +204,7 @@
         0
       ],
       "vae": [
-        "54",
+        "62",
         2
       ]
     },
@@ -256,6 +246,15 @@
     "class_type": "PrimitiveStringMultiline",
     "_meta": {
       "title": "positive_input"
+    }
+  },
+  "62": {
+    "inputs": {
+      "ckpt_name": "SDXL/hassakuv32.clRn.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Load Checkpoint"
     }
   }
 }
