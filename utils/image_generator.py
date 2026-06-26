@@ -43,7 +43,7 @@ class ComfyApiWorker:
             if not "comfy_workflow" in model:
                 continue
             model = dict(model)
-            comfy_workflow = self._read_workflow(model["name"])
+            comfy_workflow = self._read_workflow(model["comfy_workflow"])
 
             model.update({"comfy_workflow": comfy_workflow, "tags_type": TagSource(model.get("tags_type"))})
             self.checkpoint_list.append(model)
