@@ -43,7 +43,7 @@ class SzurubooruPoster:
         tags_of_foxgirls = ["fox", "fox_ears","fox_tail","fox_girl"]
         if all(tag not in post_tags for tag in tags_of_foxgirls):
             ## NoFoxgirls bro try again
-            return
+            return None
 
         safety = "safe" if ai_image.ratings.get("general") > ai_image.ratings.get("sensitive") else "sketchy"
 
