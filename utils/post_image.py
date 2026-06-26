@@ -40,7 +40,7 @@ class SzurubooruPoster:
         post_tags.append(ai_image.model_name)
 
         # TODO LOAD FROM CONFIG
-        tags_of_foxgirls = []
+        tags_of_foxgirls = ["fox", "fox_ears","fox_tail","fox_girl"]
         if all(tag not in post_tags for tag in tags_of_foxgirls):
             ## NoFoxgirls bro try again
             return
