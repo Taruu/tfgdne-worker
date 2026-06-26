@@ -39,6 +39,12 @@ class SzurubooruPoster:
         post_tags = list(ai_image.general_tags.keys())
         post_tags.append(ai_image.model_name)
 
+        # TODO LOAD FROM CONFIG
+        tags_of_foxgirls = []
+        if all(tag not in post_tags for tag in tags_of_foxgirls):
+            ## NoFoxgirls bro try again
+            return
+
         safety = "safe" if ai_image.ratings.get("general") > ai_image.ratings.get("sensitive") else "sketchy"
 
         post = self.szurubooru_api.upload(content=ai_image.image_bytes, tags=post_tags, safety=safety)
