@@ -125,17 +125,17 @@ class ComfyApiWorker:
         # if not negative_block_id and not all_positive_block_id:
         #     raise Exception(f"Where is input for prompt??")
         if all_in_one_positive_block_id:
-            if local_workflow[all_in_one_positive_block_id]["inputs"].get("text"):
+            if "text" in local_workflow[all_in_one_positive_block_id]["inputs"]:
                 local_workflow[all_in_one_positive_block_id]["inputs"]["text"] \
                     += f"{artist_prompt},{static_positive_tags},{prompt}"
-            elif local_workflow[all_in_one_positive_block_id]["inputs"].get("value"):
+            elif "value" in local_workflow[all_in_one_positive_block_id]["inputs"]:
                 local_workflow[all_in_one_positive_block_id]["inputs"]["value"] \
                     += f"{artist_prompt},{static_positive_tags},{prompt}"
         if all_in_one_negative_block_id:
-            if local_workflow[all_in_one_negative_block_id]["inputs"].get("text"):
+            if "text" in local_workflow[all_in_one_negative_block_id]["inputs"]:
                 local_workflow[all_in_one_negative_block_id]["inputs"]["text"] \
                 += f"{static_negative_tags}, {negative_prompt}"
-            elif local_workflow[all_in_one_negative_block_id]["inputs"].get("value"):
+            elif "value" in local_workflow[all_in_one_negative_block_id]["inputs"]:
                 local_workflow[all_in_one_negative_block_id]["inputs"]["value"] \
                     += f"{static_negative_tags}, {negative_prompt}"
 
